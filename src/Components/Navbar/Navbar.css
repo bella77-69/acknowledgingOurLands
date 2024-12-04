@@ -1,40 +1,13 @@
 .logo {
   display: block;
   height: 50px;
-  width: 50px; /* Ensure you set width as well if using background */
+  width: 50px;
   margin-right: 16px;
   background-image: url("../../assets/Images/icon_one.png");
-  background-size: cover; /* Optional: adjust the background image size */
+  background-size: cover; 
   background-position: center; 
   border: none !important;
 }
 
+
 /* src/Navbar.module.css */
-.navbar {
-    background-color: #2d3748; /* Custom background color */
-    padding: 1rem;
-  }
-  
-  .navbar__brand img {
-    height: 40px;
-    width: auto;
-  }
-  
-  .navbar__link {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    color: #FFFCF7;
-  }
-  
-  .navbar__link:hover {
-    background-color: #4a5568; /* Custom hover color */
-  }
-  
-  .navbar__icon {
-    width: 24px;
-    height: 24px;
-    color: #FFFCF7;
-  }
-  
