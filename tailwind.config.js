@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ["class", '[data-mode="dark"]'], // Updated to common dark mode handling
+  darkMode: 'class', // Updated to common dark mode handling
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
@@ -17,11 +17,14 @@ module.exports = {
           "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../src/assets/Images/hero.png')",
       },
       colors: {
-        customWhite: '#FFFCF7',
-        customNav: '#446464',
+        customWhite: '#FFFCF7', // Light mode text color
+        customNav: '#446464',   // Light mode navbar color
         active: '#223232',
         hover: '#698383',
-        customBlack: '#1A1A1A',
+        customBlack: '#1A1A1A', // Light mode background color
+        darkBackground: '#0D1117', // New: Background color for dark mode
+        darkNav: '#1E2A31', // New: Navbar color for dark mode
+        darkText: '#EDEDED', // New: Text color for dark mode
       },
       fontFamily: {
         sans: ["Graphik", "sans-serif"],

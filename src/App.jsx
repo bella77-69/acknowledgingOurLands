@@ -1,20 +1,35 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import Main from "./Pages/Main/Main";
+import About from "./Pages/About/About";
 
 function App() {
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true" // Check user preference on load
+  );
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("darkMode", darkMode); 
+  }, [darkMode]);
+
   return (
-    <>
-       <BrowserRouter>
-        <Navbar />
+    <div className="min-h-screen bg-customBlack dark:bg-darkBackground text-customWhite dark:text-darkText">
+      <BrowserRouter>
+        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
         <Routes>
           <Route path="/" element={<Main />} />
-          </Routes>
-
-<Footer />
-</BrowserRouter>
-    </>
+          <Route path="/about" element={<About />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </div>
   );
 }
 
