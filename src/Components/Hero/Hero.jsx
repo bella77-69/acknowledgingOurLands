@@ -21,13 +21,13 @@ export default function Hero() {
 
             <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
-                href="#"
+                href="/discover"
                 className="rounded-lg bg-customNav px-6 py-3 text-base font-semibold text-customWhite shadow-lg hover:bg-active focus:outline-noneS"
               >
                 Get Started
               </a>
               <a
-                href="#"
+                href="/learn-more"
                 className="text-base font-semibold text-customWhite hover:text-active"
               >
                 Learn More <span aria-hidden="true">→</span>
