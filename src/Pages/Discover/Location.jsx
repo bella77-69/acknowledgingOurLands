@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Discover from "./Discover";
+
 const apiKey = import.meta.env.VITE_API_KEY;
 
 const Location = () => {
@@ -28,7 +29,7 @@ const Location = () => {
         `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}`
       );
       const components = response.data.results[0]?.components;
-      const cityName = 
+      const cityName =
         components?.city || components?.town || components?.village || "City data not found";
       setCity(cityName);
     } catch (error) {
@@ -57,40 +58,43 @@ const Location = () => {
   }, []);
 
   return (
-    <section className="land">
-      <div className="location">
+    <section className="bg-customWhite dark:bg-darkNav p-2 md:p-6">
+        <div className="gap-6 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 flex flex-col items-center  py-6 min-h-screen">
+    
+      <div className="w-full max-w-4xl rounded-lg p-6">
         {latitude && longitude ? (
-          <div className="content">
-            <p className="location-heading">
-              This page detects your current location and displays the
-              coordinates. Additionally, the land acknowledgment section below
-              helps you identify the traditional lands you are on, fostering
-              awareness and respect.
+          <>
+            <p className="text-lg font-medium text-gray-700 dark:text-customWhite mb-4">
+              This page detects your current location and displays the coordinates. Additionally, the land acknowledgment section below helps you identify the traditional lands you are on, fostering awareness and respect.
             </p>
-            <div className="box">
-              <h2 className="location-title">Your Current Location:</h2>
-              <div className="location-info">
-                <p>
-                  <strong>Latitude:</strong> {latitude}
+
+            <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 mb-6">
+              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">Your Current Location:</h2>
+
+              <div className="space-y-2">
+                <p className="text-gray-600 dark:text-customWhite">
+                  <strong className="font-semibold">Latitude:</strong> {latitude}
                 </p>
-                <p>
-                  <strong>Longitude:</strong> {longitude}
+                <p className="text-gray-600 dark:text-customWhite">
+                  <strong className="font-semibold">Longitude:</strong> {longitude}
                 </p>
-                <p>
-                  <strong>City:</strong> {city}
+                <p className="text-gray-600 dark:text-customWhite">
+                  <strong className="font-semibold">City:</strong> {city}
                 </p>
-              </div>
-              <div className="land-acknowledgment-container">
-              <Discover indigenousLands={indigenousLands} />
               </div>
             </div>
-          </div>
+
+            <div>
+              <Discover indigenousLands={indigenousLands} />
+            </div>
+          </>
         ) : error ? (
-          <p className="alert alert-danger">Error: {error}</p>
+          <p className="text-red-600 dark:text-red-400 font-semibold">Error: {error}</p>
         ) : (
-          <p>Loading location...</p>
+          <p className="text-gray-600 dark:text-gray-400">Loading location...</p>
         )}
       </div>
+    </div>
     </section>
   );
 };
