@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import {
   Disclosure,
   DisclosureButton,
@@ -9,10 +10,10 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import "./Navbar.css";
 
 const navigation = [
-  { name: "Home", href: "/", current: true },
-  { name: "About", href: "/about", current: false },
-  { name: "Discover", href: "#", current: false },
-  { name: "Contact", href: "#", current: false },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Discover", href: "/discover" },
+  { name: "Contact", href: "/contact" },
 ];
 
 function classNames(...classes) {
@@ -20,6 +21,8 @@ function classNames(...classes) {
 }
 
 export default function Navbar({ darkMode, setDarkMode }) {
+  const location = useLocation();
+
   return (
     <Disclosure as="nav" className="bg-customNav">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -39,18 +42,19 @@ export default function Navbar({ darkMode, setDarkMode }) {
             </DisclosureButton>
           </div>
 
-          {/* Navigation Links and Dark Mode Icon */}
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="hidden sm:ml-6 sm:flex items-center space-x-4">
               {navigation.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  aria-current={item.current ? "page" : undefined}
+                  aria-current={
+                    location.pathname === item.href ? "page" : undefined
+                  }
                   className={classNames(
-                    item.current
+                    location.pathname === item.href
                       ? "bg-active text-customWhite"
-                      : "text-gray-300 hover:bg-hover hover:text-customWhite",
+                      : "text-textWhite hover:bg-hover hover:text-customWhite",
                     "rounded-md px-3 py-2 text-sm font-medium"
                   )}
                 >
@@ -58,7 +62,6 @@ export default function Navbar({ darkMode, setDarkMode }) {
                 </a>
               ))}
 
-              {/* Dark Mode Icon */}
               <button
                 onClick={() => setDarkMode(!darkMode)}
                 className="p-2 rounded-full text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
@@ -101,9 +104,11 @@ export default function Navbar({ darkMode, setDarkMode }) {
               key={item.name}
               as="a"
               href={item.href}
-              aria-current={item.current ? "page" : undefined}
+              aria-current={
+                location.pathname === item.href ? "page" : undefined
+              }
               className={classNames(
-                item.current
+                location.pathname === item.href
                   ? "bg-active text-customWhite"
                   : "text-gray-300 hover:bg-hover hover:text-customWhite",
                 "block rounded-md px-3 py-2 text-base font-medium"
@@ -113,7 +118,6 @@ export default function Navbar({ darkMode, setDarkMode }) {
             </DisclosureButton>
           ))}
 
-          {/* Dark Mode Icon for Mobile View */}
           <div className="flex items-center px-3 py-2">
             <button
               onClick={() => setDarkMode(!darkMode)}

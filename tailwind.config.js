@@ -19,6 +19,8 @@ module.exports = {
       colors: {
         customWhite: '#FFFCF7', // Light mode text color
         customNav: '#446464',   // Light mode navbar color
+        customNavDark: '#a2b2b2', // dark mode text color
+        textWhite: '#e6e3de',
         active: '#223232',
         hover: '#698383',
         customBlack: '#1A1A1A', // Light mode background color
