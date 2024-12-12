@@ -22,7 +22,7 @@ export default function Hero() {
             <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="/discover"
-                className="rounded-lg bg-customNav px-6 py-3 text-base font-semibold text-customWhite shadow-lg hover:bg-active focus:outline-noneS"
+                className="rounded-lg bg-customNav px-6 py-3 text-base font-semibold text-customWhite shadow-lg hover:bg-active focus:outline-none transition"
               >
                 Get Started
               </a>

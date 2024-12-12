@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 const Discover = ({ indigenousLands = [] }) => {
-  const [currentAcknowledgmentIndex, setCurrentAcknowledgmentIndex] = useState(0);
-
+  const [currentAcknowledgmentIndex, setCurrentAcknowledgmentIndex] =
+    useState(0);
 
   const btnLearn = (e) => {
     e.preventDefault();
@@ -26,10 +26,8 @@ const Discover = ({ indigenousLands = [] }) => {
   };
 
   return (
-<section >
-<div>
-
-      <div>
+    <>
+      <div className=" text-active dark:text-customWhite">
         {indigenousLands && indigenousLands.length > 0 ? (
           <p>
             {acknowledgmentVariations[currentAcknowledgmentIndex]}
@@ -38,39 +36,35 @@ const Discover = ({ indigenousLands = [] }) => {
                 <React.Fragment key={land.properties.Name + index}>
                   {index > 0 && ", "}
                   {land.properties.Name}
-                 
-                 {/* <div>
+
+                  {/* <div>
                  {land.properties.description}
 
                  </div> */}
                 </React.Fragment>
-              
               ))}
             </span>
             {` First Nations.`}
           </p>
-         
         ) : (
-          <p>
-            Loading Indigenous Lands information...
-          </p>
+          <p>Loading Indigenous Lands information...</p>
         )}
+        <div className="text-active dark:text-customWhite flex flex-col">
+          <button
+            className="mt-2 rounded-lg bg-customNav px-6 py-3 text-base font-semibold text-customWhite shadow-lg hover:bg-active focus:outline-none transition"
+            onClick={changeAcknowledgment}
+          >
+            Change Acknowledgment
+          </button>
+          <button
+            className="mt-2 rounded-lg bg-customNav px-6 py-3 text-base font-semibold text-customWhite shadow-lg hover:bg-active focus:outline-none transition"
+            onClick={(e) => btnLearn(e)}
+          >
+            Learn More
+          </button>
+        </div>
       </div>
-
-      <div >
-        <button
-          onClick={changeAcknowledgment}
-        >
-          Change Acknowledgment
-        </button>
-        <button
-          onClick={(e) => btnLearn(e)}
-        >
-          Learn More
-        </button>
-      </div>
-      </div>
-    </section>
+    </>
   );
 };
 
