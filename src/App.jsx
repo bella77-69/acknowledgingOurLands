@@ -4,8 +4,9 @@ import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import Main from "./Pages/Main/Main";
 import About from "./Pages/About/About";
-import Discover from "./Pages/Discover/Discover";
-import Location from "./Pages/Discover/Location";
+// import Discover from "./Pages/Discover/Discover";
+// import Location from "./Pages/Discover/Location";
+import DiscoverLands from "./Pages/Discover/DiscoverLands";
 
 function App() {
   const [darkMode, setDarkMode] = useState(
@@ -28,8 +29,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/about" element={<About />} />
-          <Route path="/location" element={<Location />} />
-          <Route path="/discover" element={<Location />} />
+          {/* <Route path="/location" element={<Location />} /> */}
+          <Route path="/discover" element={<DiscoverLands/>} />
          
         </Routes>
         <Footer />

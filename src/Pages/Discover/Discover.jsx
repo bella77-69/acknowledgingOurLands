@@ -26,7 +26,7 @@ const Discover = ({ indigenousLands = [] }) => {
   };
 
   return (
-    <>
+   
       <div className=" text-active dark:text-customWhite">
         {indigenousLands && indigenousLands.length > 0 ? (
           <p>
@@ -49,7 +49,9 @@ const Discover = ({ indigenousLands = [] }) => {
         ) : (
           <p>Loading Indigenous Lands information...</p>
         )}
-        <div className="text-active dark:text-customWhite flex flex-col">
+    
+ 
+      <div className="text-active dark:text-customWhite flex flex-col">
           <button
             className="mt-2 rounded-lg bg-customNav px-6 py-3 text-base font-semibold text-customWhite shadow-lg hover:bg-active focus:outline-none transition"
             onClick={changeAcknowledgment}
@@ -63,8 +65,7 @@ const Discover = ({ indigenousLands = [] }) => {
             Learn More
           </button>
         </div>
-      </div>
-    </>
+    </div>
   );
 };
 
