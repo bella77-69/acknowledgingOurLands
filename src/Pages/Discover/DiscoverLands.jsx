@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+
 const apiKey = import.meta.env.VITE_API_KEY;
 
 const DiscoverLands = () => {
@@ -10,8 +11,7 @@ const DiscoverLands = () => {
   const [city, setCity] = useState("Loading...");
   const [indigenousLands, setIndigenousLands] = useState([]);
   const [error, setError] = useState(null);
-  const [currentAcknowledgmentIndex, setCurrentAcknowledgmentIndex] =
-    useState(0);
+  const [currentAcknowledgmentIndex, setCurrentAcknowledgmentIndex] = useState(0);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -83,10 +83,8 @@ const DiscoverLands = () => {
             Discover Indigenous Lands
           </h1>
           <p className="mt-4 text-gray-600 dark:text-gray-300">
-            This page detects your current location and displays the
-            coordinates. Additionally, the land acknowledgment section below
-            helps you identify the traditional lands you are on, fostering
-            awareness and respect.
+            This page detects your current location and displays the coordinates.
+            Additionally, the land acknowledgment section below helps you identify the traditional lands you are on, fostering awareness and respect.
           </p>
         </div>
 
@@ -104,8 +102,7 @@ const DiscoverLands = () => {
                 {latitude && longitude ? (
                   <p className="mt-2 text-gray-600 dark:text-gray-300">
                     <strong>City:</strong> {city} <br />
-                    <strong>Coordinates:</strong> Latitude: {latitude},
-                    Longitude: {longitude}
+                    <strong>Coordinates:</strong> Latitude: {latitude}, Longitude: {longitude}
                   </p>
                 ) : (
                   <p className="text-red-500">
@@ -120,23 +117,25 @@ const DiscoverLands = () => {
                   Indigenous Lands
                 </h2>
                 {indigenousLands.length > 0 ? (
-                  indigenousLands.map((land, index) => (
-                    <div key={index} className="mt-2">
-                      <strong className="text-gray-700 dark:text-gray-200">
-                        {land.properties.Name}
-                      </strong>
-                      <p className="text-gray-600 dark:text-gray-400">
-                        <a
-                          href={land.properties.description}
-                          className="text-gray-600 dark:text-gray-400 hover:underline"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {land.properties.description}
-                        </a>
-                      </p>
-                    </div>
-                  ))
+                  indigenousLands.map((land, index) => {
+                    const name = land?.properties?.Name || "Unknown Land";
+                    const description = land?.properties?.description || "No description available.";
+                    return (
+                      <div key={index} className="mt-2">
+                        <strong className="text-gray-700 dark:text-gray-200">{name}</strong>
+                        <p className="text-gray-600 dark:text-gray-400">
+                          <a
+                            href={description}
+                            className="text-gray-600 dark:text-gray-400 hover:underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {description}
+                          </a>
+                        </p>
+                      </div>
+                    );
+                  })
                 ) : (
                   <p className="text-gray-600 dark:text-gray-400">
                     No Indigenous Lands data available.
@@ -146,7 +145,7 @@ const DiscoverLands = () => {
             </div>
 
             {/* Right Column: Map */}
-            <div className="rounded-lg shadow-md xs:mt-4 lg:mt-0">
+            <div className="xs:mt-4 lg:mt-0">
               {latitude && longitude ? (
                 <MapContainer
                   center={[latitude, longitude]}
@@ -177,13 +176,11 @@ const DiscoverLands = () => {
             </h2>
             <p className="mt-4 text-gray-600 dark:text-gray-300 text-center">
               {acknowledgmentVariations[currentAcknowledgmentIndex]}
-              {/* {indigenousLands.length > 0 &&
-            indigenousLands.map((land) => land.properties.Name).join(", ")} */}
               <span>
                 {indigenousLands.map((land, index) => (
-                  <React.Fragment key={land.properties.Name}>
+                  <React.Fragment key={land?.properties?.Name || index}>
                     {index > 0 && ", "}
-                    {land.properties.Name}
+                    {land?.properties?.Name || "Unknown Land"}
                   </React.Fragment>
                 ))}
               </span>

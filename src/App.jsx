@@ -4,9 +4,10 @@ import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import Main from "./Pages/Main/Main";
 import About from "./Pages/About/About";
-// import Discover from "./Pages/Discover/Discover";
+import Discover from "./Pages/Discover/Discover";
 // import Location from "./Pages/Discover/Location";
 import DiscoverLands from "./Pages/Discover/DiscoverLands";
+import LearnMore from "./Pages/LearnMore/LearnMore";
 
 function App() {
   const [darkMode, setDarkMode] = useState(
@@ -31,7 +32,7 @@ function App() {
           <Route path="/about" element={<About />} />
           {/* <Route path="/location" element={<Location />} /> */}
           <Route path="/discover" element={<DiscoverLands/>} />
-         
+         <Route path="/learn-more" element={<LearnMore/>} />
         </Routes>
         <Footer />
       </BrowserRouter>

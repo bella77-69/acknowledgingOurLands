@@ -1,72 +1,62 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+const your_api_key= import.meta.env.VITE_API_KEY;
 
-const Discover = ({ indigenousLands = [] }) => {
-  const [currentAcknowledgmentIndex, setCurrentAcknowledgmentIndex] =
-    useState(0);
+const Discover = () => {
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  const [error, setError] = useState(null);
 
-  const btnLearn = (e) => {
-    e.preventDefault();
-    window.location.href = "/learn-more";
-  };
 
-  const acknowledgmentVariations = [
-    "I am honored to be a guest on the traditional and unceded territories of the ",
-    "I acknowledge that I am on the traditional and unceded territories of the ",
-    "Today, we gather on the ancestral lands of the ",
-    "We are grateful to gather on the traditional and unceded territories of the ",
-    "We are gathered on the traditional and unceded territories of the ",
-    "We are meeting on the traditional and unceded territories of the ",
-    "We respectfully acknowledge and extend our gratitude for their stewardship of this land since time immemorial.",
-  ];
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setLatitude(latitude);
+          setLongitude(longitude);
+          console.log("Latitude is :", latitude);
+          console.log("Longitude is :", longitude);
+        },
+        (error) => setError("Location access denied.")
+        
+      );
+    } else {
+      setError("Geolocation is not supported by this browser.");
+    }
+  }, []);
 
-  const changeAcknowledgment = () => {
-    setCurrentAcknowledgmentIndex((prevIndex) =>
-      prevIndex === acknowledgmentVariations.length - 1 ? 0 : prevIndex + 1
-    );
-  };
+  // Construct the URL for the iframe
+  const embedUrl =
+    latitude && longitude
+      ? `https://native-land.ca/api/embed/embed.html?maps=languages,territories&position=${latitude},${longitude}&key=${your_api_key}`
+      : null;
 
   return (
-   
-      <div className=" text-active dark:text-customWhite">
-        {indigenousLands && indigenousLands.length > 0 ? (
-          <p>
-            {acknowledgmentVariations[currentAcknowledgmentIndex]}
-            <span>
-              {indigenousLands.map((land, index) => (
-                <React.Fragment key={land.properties.Name + index}>
-                  {index > 0 && ", "}
-                  {land.properties.Name}
-
-                  {/* <div>
-                 {land.properties.description}
-
-                 </div> */}
-                </React.Fragment>
-              ))}
-            </span>
-            {` First Nations.`}
-          </p>
-        ) : (
-          <p>Loading Indigenous Lands information...</p>
-        )}
-    
+    <div className="map-container">
+      <h1 className="text-xl font-bold text-gray-800 dark:text-white">
+        Native Land Map
+      </h1>
  
-      <div className="text-active dark:text-customWhite flex flex-col">
-          <button
-            className="mt-2 rounded-lg bg-customNav px-6 py-3 text-base font-semibold text-customWhite shadow-lg hover:bg-active focus:outline-none transition"
-            onClick={changeAcknowledgment}
-          >
-            Change Acknowledgment
-          </button>
-          <button
-            className="mt-2 rounded-lg bg-customNav px-6 py-3 text-base font-semibold text-customWhite shadow-lg hover:bg-active focus:outline-none transition"
-            onClick={(e) => btnLearn(e)}
-          >
-            Learn More
-          </button>
-        </div>
+      {error && (
+        <p className="text-red-500">
+          {error} Please check your browser's location permissions.
+        </p>
+      )}
+      {embedUrl ? (
+        <iframe
+          src={embedUrl}
+          width="100%"
+          height="500px"
+          style={{ border: "none" }}
+          title="Native Land Map"
+          allowFullScreen
+        />
+      ) : (
+        <p>Loading map...</p>
+      )}
     </div>
   );
 };
 
 export default Discover;
+
