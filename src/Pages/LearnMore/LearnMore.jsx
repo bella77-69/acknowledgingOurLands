@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import learn from "../../assets/Images/learn.png";
-import './LearnMore.css';
+import "./LearnMore.css";
 
 const LearnMore = () => {
   const [isOpen, setIsOpen] = useState(null);
@@ -36,7 +36,7 @@ const LearnMore = () => {
             {questions.map((question, index) => (
               <div
                 key={index}
-                className="border-b border-gray-300 dark:border-gray-600 mb-4 pb-4"
+                className="border-b border-activeLight dark:border-activeLighter mb-4 pb-4"
               >
                 <h4
                   className="text-base font-medium text-active dark:text-customWhite cursor-pointer hover:underline"
@@ -45,7 +45,7 @@ const LearnMore = () => {
                   {question}
                 </h4>
                 {isOpen === index && (
-                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                  <p className="mt-2 text-sm text-activeLight dark:text-customWhiteDarker">
                     {answers[index]}
                   </p>
                 )}
@@ -56,26 +56,25 @@ const LearnMore = () => {
               More ways you can learn
             </h3>
             <div className="learn-links">
-  <a
-    className="underline text-orangeHover hover:text-orange-800"
-    href="https://ehprnh2mwo3.exactdn.com/wp-content/uploads/2021/01/Calls_to_Action_English2.pdf"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Truth and Reconciliation Commission's Calls to Action
-  </a>
-</div>
-<div className="learn-links">
-  <a
-    className="underline text-orangeHover hover:text-orange-800"
-    href="https://www.justice.gc.ca/eng/declaration/un_declaration_EN1.pdf"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    United Nations Declaration on the Rights of Indigenous Peoples
-  </a>
-</div>
-
+              <a
+                className="pointer text-activeLight hover:text-orangeHover dark:text-customWhiteDarker dark:hover:text-orangeHover"
+                href="https://ehprnh2mwo3.exactdn.com/wp-content/uploads/2021/01/Calls_to_Action_English2.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Truth and Reconciliation Commission's Calls to Action
+              </a>
+            </div>
+            <div className="learn-links mt-2">
+              <a
+                             className="pointer text-activeLight hover:text-orangeHover dark:text-customWhiteDarker dark:hover:text-orangeHover"
+                href="https://www.justice.gc.ca/eng/declaration/un_declaration_EN1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                United Nations Declaration on the Rights of Indigenous Peoples
+              </a>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 gap-4 mt-8">

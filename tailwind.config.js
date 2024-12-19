@@ -17,18 +17,21 @@ module.exports = {
           "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../src/assets/Images/hero.png')",
       },
       colors: {
-        customWhite: '#FFFCF7', // Light mode text color
+        customWhite: '#FFFCF7',// Light mode text color
+        customWhiteDarker: '#cccac6',
         customNav: '#446464',   // Light mode navbar color
         customNavDark: '#a2b2b2', // dark mode text color
         textWhite: '#e6e3de',
         active: '#223232',
+        activeLight: '#384747',
+        activeLighter: '#4e5b5b',
         hover: '#698383',
         customBlack: '#1A1A1A', // Light mode background color
         darkBackground: '#0D1117', // New: Background color for dark mode
         darkNav: '#1E2A31', // New: Navbar color for dark mode
         darkText: '#EDEDED', // New: Text color for dark mode
         cardLight: '#a2b2b2',
-        orangeHover: "#e38929",
+        orangeHover: "#f1c494",//footer hover color
       },
       fontFamily: {
         sans: ["Graphik", "sans-serif"],
