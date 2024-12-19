@@ -75,11 +75,11 @@ const DiscoverLands = () => {
   };
 
   return (
-    <section className="py-10 bg-gray-50 dark:bg-gray-900 sm:py-16 lg:py-20">
+    <section className="py-10 bg-customWhite dark:bg-darkNav sm:py-16 lg:py-20">
       <div className="container mx-auto px-4">
         {/* Title and Intro */}
         <div className="text-center max-w-2xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-800 dark:text-white sm:text-4xl">
+          <h1 className="text-2xl tracking-tight font-extrabold text-active dark:text-customWhite sm:text-4xl">
             Discover Indigenous Lands
           </h1>
           <p className="mt-4 text-gray-600 dark:text-gray-300">

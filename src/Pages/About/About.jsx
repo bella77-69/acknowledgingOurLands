@@ -80,7 +80,7 @@ const About = () => {
 
       <div className="text-center p-4">
         <a
-          className="inline-flex justify-center items-center gap-x-2 text-center bg-customNav text-textWhite hover:bg-hover hover:text-textcustomWhite sm:text-sm md:text-base
+          className="inline-flex justify-center items-center gap-x-2 text-center bg-customNav text-textWhite hover:bg-hover  hover:text-active sm:text-sm md:text-base
                     rounded-md px-3 py-2 text-sm font-medium hover:shadow-xl border border-transparent focus:outline-none transition md:px-6"
           href="/learn-more"
         >

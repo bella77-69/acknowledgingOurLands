@@ -65,7 +65,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
 
               <button
                 onClick={() => setDarkMode(!darkMode)}
-                className="p-2 rounded-full text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                className="p-2 rounded-full text-textWhite  dark:hover:text-customWhite"
               >
                 <span className="sr-only">Toggle Dark Mode</span>
                 <svg

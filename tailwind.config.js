@@ -19,10 +19,10 @@ module.exports = {
       colors: {
         customWhite: '#FFFCF7',// Light mode text color
         customWhiteDarker: '#cccac6',
-        customNav: '#446464',   // Light mode navbar color
+        customNav: '#577474',   // Light mode navbar color
         customNavDark: '#a2b2b2', // dark mode text color
         textWhite: '#e6e3de',
-        active: '#223232',
+        active: '#365050',
         activeLight: '#384747',
         activeLighter: '#4e5b5b',
         hover: '#698383',
@@ -32,6 +32,7 @@ module.exports = {
         darkText: '#EDEDED', // New: Text color for dark mode
         cardLight: '#a2b2b2',
         orangeHover: "#f1c494",//footer hover color
+        buttonHover: '#365050'
       },
       fontFamily: {
         sans: ["Graphik", "sans-serif"],

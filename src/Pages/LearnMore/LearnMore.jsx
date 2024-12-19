@@ -22,14 +22,19 @@ const LearnMore = () => {
   ];
 
   return (
-    <section className="bg-customWhite dark:bg-darkNav p-2 md:p-6">
-      <div className="py-8 px-4 mx-auto max-w-screen-xl">
-        <h2 className="text-2xl tracking-tight font-extrabold text-active dark:text-customWhite mb-6 text-center">
+    <section className="py-10 bg-customWhite dark:bg-darkNav sm:py-16 lg:py-20">
+         <div className="container mx-auto px-4">
+      <div className="text-center max-w-2xl mx-auto">
+      <h1 className="text-2xl tracking-tight font-extrabold text-active dark:text-customWhite sm:text-4xl">
           Learn More
-        </h2>
-
+        </h1>
+        <p className="mt-4 text-gray-600 dark:text-gray-300">
+            This page detects your current location and displays the coordinates.
+            Additionally, the land acknowledgment section below helps you identify the traditional lands you are on, fostering awareness and respect.
+          </p>
+</div>
         <div className="gap-16 items-center py-8 lg:grid lg:grid-cols-2 lg:py-16">
-          <div className="font-light text-customNav sm:text-lg dark:text-customNavDark">
+          <div className="p-2 font-light text-customNav sm:text-lg dark:text-customNavDark">
             <h3 className="mb-4 text-xl tracking-tight font-bold text-active dark:text-customWhite">
               Frequently Asked Questions
             </h3>
@@ -67,7 +72,7 @@ const LearnMore = () => {
             </div>
             <div className="learn-links mt-2">
               <a
-                             className="pointer text-activeLight hover:text-orangeHover dark:text-customWhiteDarker dark:hover:text-orangeHover"
+                className="pointer text-activeLight hover:text-orangeHover dark:text-customWhiteDarker dark:hover:text-orangeHover"
                 href="https://www.justice.gc.ca/eng/declaration/un_declaration_EN1.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -90,9 +95,9 @@ const LearnMore = () => {
           <a
             className="inline-flex justify-center items-center gap-x-2 text-center bg-customNav text-textWhite hover:bg-hover hover:text-textcustomWhite sm:text-sm md:text-base
                       rounded-md px-3 py-2 text-sm font-medium hover:shadow-xl border border-transparent focus:outline-none transition md:px-6"
-            href="/about"
+            href="/contact"
           >
-            Learn About Us
+            Contact Us
             <svg
               className="flex-shrink-0 w-3 h-3 sm:w-4 sm:h-4"
               xmlns="http://www.w3.org/2000/svg"

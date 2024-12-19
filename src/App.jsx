@@ -8,6 +8,7 @@ import Discover from "./Pages/Discover/Discover";
 // import Location from "./Pages/Discover/Location";
 import DiscoverLands from "./Pages/Discover/DiscoverLands";
 import LearnMore from "./Pages/LearnMore/LearnMore";
+import Contact from "./Pages/Contact/Contact";
 
 function App() {
   const [darkMode, setDarkMode] = useState(
@@ -33,6 +34,7 @@ function App() {
           {/* <Route path="/location" element={<Location />} /> */}
           <Route path="/discover" element={<DiscoverLands/>} />
          <Route path="/learn-more" element={<LearnMore/>} />
+         <Route path="/contact" element={<Contact/>} />
         </Routes>
         <Footer />
       </BrowserRouter>
