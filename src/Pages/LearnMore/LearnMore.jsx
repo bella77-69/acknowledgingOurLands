@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import learn from "../../assets/Images/learn.png";
+import './LearnMore.css';
 
 const LearnMore = () => {
   const [isOpen, setIsOpen] = useState(null);
@@ -12,13 +13,11 @@ const LearnMore = () => {
     "Understanding Land Acknowledgements",
     "Why is it important?",
     "How do I do a Land Acknowledgement?",
-    "What does 'unceded' mean in a Land Acknowledgement?",
   ];
 
   const answers = [
-    "A land acknowledgment is a formal recognition of the ancestral Indigenous territories where an event occurs, honoring the peoples who have stewarded the land for generations.",
-    "Land acknowledgements are a way to recognize the historical and ongoing connection of Indigenous peoples to the land, as well as to raise awareness about the injustices and challenges they have faced.",
-    "To conduct a meaningful land acknowledgment, follow these essential steps: Begin by researching the Indigenous peoples who have historically and currently inhabit the land in your location.",
+    "A land acknowledgment is a statement that recognizes the traditional territories of Indigenous peoples and their relationship with the land. It’s a way to honor their history, culture, and ongoing presence. More than just words, it reflects a commitment to respect, reconciliation, and shared stewardship of the land. By learning about and practicing land acknowledgments, we acknowledge the past, recognize current realities, and commit to meaningful actions that support Indigenous communities.",
+    "Land acknowledgments recognize the traditional territories of Indigenous peoples and honor their enduring connection to the land. They raise awareness of histories and treaties that are often overlooked, fostering respect and understanding. By acknowledging the land, we take a step toward reconciliation, showing commitment to learning from and supporting Indigenous communities. These statements remind us of our shared responsibility to care for the land and contribute to ongoing efforts for justice and equity.",
     "In a land acknowledgment, the term 'unceded' refers to land that has not been legally transferred or signed away by Indigenous peoples to colonial or settler governments.",
   ];
 
@@ -51,27 +50,32 @@ const LearnMore = () => {
                   </p>
                 )}
               </div>
-              
             ))}
-                    <h2 className="page-title">More ways you can learn</h2>
-        <div className="learn-links">
-          <a
-            href="https://ehprnh2mwo3.exactdn.com/wp-content/uploads/2021/01/Calls_to_Action_English2.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Truth and Reconciliation Commission's Calls to Action
-          </a>
-        </div>
-        <div className="learn-links">
-          <a
-            href="https://www.justice.gc.ca/eng/declaration/un_declaration_EN1.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            United Nations Declaration on the Rights of Indigenous Peoples
-          </a>
-        </div>
+
+            <h3 className="mb-4 text-xl tracking-tight font-bold text-active dark:text-customWhite">
+              More ways you can learn
+            </h3>
+            <div className="learn-links">
+  <a
+    className="underline text-orangeHover hover:text-orange-800"
+    href="https://ehprnh2mwo3.exactdn.com/wp-content/uploads/2021/01/Calls_to_Action_English2.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Truth and Reconciliation Commission's Calls to Action
+  </a>
+</div>
+<div className="learn-links">
+  <a
+    className="underline text-orangeHover hover:text-orange-800"
+    href="https://www.justice.gc.ca/eng/declaration/un_declaration_EN1.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    United Nations Declaration on the Rights of Indigenous Peoples
+  </a>
+</div>
+
           </div>
 
           <div className="grid grid-cols-1 gap-4 mt-8">
@@ -80,7 +84,6 @@ const LearnMore = () => {
               src={learn}
               alt="Placeholder for land acknowledgment visuals"
             />
-  
           </div>
         </div>
 

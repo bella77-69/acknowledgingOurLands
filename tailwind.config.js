@@ -27,7 +27,8 @@ module.exports = {
         darkBackground: '#0D1117', // New: Background color for dark mode
         darkNav: '#1E2A31', // New: Navbar color for dark mode
         darkText: '#EDEDED', // New: Text color for dark mode
-        cardLight: '#a2b2b2'
+        cardLight: '#a2b2b2',
+        orangeHover: "#e38929",
       },
       fontFamily: {
         sans: ["Graphik", "sans-serif"],
