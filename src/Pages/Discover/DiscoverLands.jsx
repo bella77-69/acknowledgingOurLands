@@ -95,12 +95,12 @@ const DiscoverLands = () => {
             {/* Left Column */}
             <div className="space-y-6">
               {/* Combined Current Location and City */}
-              <div className="p-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
-                <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
+              <div className="p-4">
+                <h2 className="text-lg tracking-tight font-extrabold  text-active dark:text-customWhite">
                   Your Current Location
                 </h2>
                 {latitude && longitude ? (
-                  <p className="mt-2 text-gray-600 dark:text-gray-300">
+                  <p className="mt-2 text-textGreyDark dark:text-textGrey">
                     <strong>City:</strong> {city} <br />
                     <strong>Coordinates:</strong> Latitude: {latitude}, Longitude: {longitude}
                   </p>
@@ -112,8 +112,8 @@ const DiscoverLands = () => {
               </div>
 
               {/* Indigenous Lands */}
-              <div className="p-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
-                <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
+              <div className="p-4">
+                <h2 className="text-lg tracking-tight font-extrabold  text-active dark:text-customWhite">
                   Indigenous Lands
                 </h2>
                 {indigenousLands.length > 0 ? (
@@ -122,11 +122,11 @@ const DiscoverLands = () => {
                     const description = land?.properties?.description || "No description available.";
                     return (
                       <div key={index} className="mt-2">
-                        <strong className="text-gray-700 dark:text-gray-200">{name}</strong>
-                        <p className="text-gray-600 dark:text-gray-400">
+                        <strong className="text-textGreyDark dark:text-textGrey">{name}</strong>
+                        <p className="text-textGreyDark dark:text-textGrey">
                           <a
                             href={description}
-                            className="text-gray-600 dark:text-gray-400 hover:underline"
+                            className="text-textGreyDark dark:text-textGrey hover:underline"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
@@ -137,7 +137,7 @@ const DiscoverLands = () => {
                     );
                   })
                 ) : (
-                  <p className="text-gray-600 dark:text-gray-400">
+                  <p className="text-textGreyDark dark:text-textGrey">
                     No Indigenous Lands data available.
                   </p>
                 )}
@@ -160,8 +160,8 @@ const DiscoverLands = () => {
                   </Marker>
                 </MapContainer>
               ) : (
-                <div className="flex items-center justify-center h-96 bg-gray-100 dark:bg-gray-700">
-                  <p className="text-gray-600 dark:text-gray-300">
+                <div className="flex items-center justify-center h-96">
+                  <p className="text-textGreyDark dark:text-textGrey">
                     Map will appear here once location is fetched.
                   </p>
                 </div>
@@ -170,11 +170,11 @@ const DiscoverLands = () => {
           </div>
 
           {/* Middle Row: Land Acknowledgment */}
-          <div className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
-            <h2 className="text-lg font-semibold text-gray-800 dark:text-white text-center">
+          <div className="p-6">
+            <h2 className="text-lg tracking-tight font-extrabold  text-active dark:text-customWhite text-center">
               Land Acknowledgment
             </h2>
-            <p className="mt-4 text-gray-600 dark:text-gray-300 text-center">
+            <p className="mt-4 text-textGreyDark dark:text-textGrey text-center">
               {acknowledgmentVariations[currentAcknowledgmentIndex]}
               <span>
                 {indigenousLands.map((land, index) => (
@@ -189,7 +189,7 @@ const DiscoverLands = () => {
             <div className="mt-6 text-center">
               <button
                 onClick={changeAcknowledgment}
-                className="px-6 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700"
+                className=" bg-customNav text-customWhite font-bold py-3 px-6 rounded-lg mt-3 hover:bg-buttonHover hover:text-customWhite transition ease-in-out duration-300"
               >
                 Generate New Acknowledgment
               </button>

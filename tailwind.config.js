@@ -32,7 +32,9 @@ module.exports = {
         darkText: '#EDEDED', // New: Text color for dark mode
         cardLight: '#a2b2b2',
         orangeHover: "#f1c494",//footer hover color
-        buttonHover: '#365050'
+        buttonHover: '#365050',
+        textGrey: '#cfccc8',
+        textGreyDark: '#535250',
       },
       fontFamily: {
         sans: ["Graphik", "sans-serif"],
