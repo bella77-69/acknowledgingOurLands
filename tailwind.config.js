@@ -37,8 +37,8 @@ module.exports = {
         textGreyDark: '#535250',
       },
       fontFamily: {
-        sans: ["Graphik", "sans-serif"],
-        serif: ["Merriweather", "serif"],
+        sans: ["Graphik","sans-serif"],
+        serif: ["Merriweather","serif"],
       },
     },
   },
