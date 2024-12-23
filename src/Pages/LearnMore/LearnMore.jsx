@@ -35,7 +35,7 @@ const LearnMore = () => {
             awareness and respect.
           </p>
         </div>
-        <div className="gap-16 items-center py-8 lg:grid lg:grid-cols-2 lg:py-4">
+        <div className="gap-16 items-center py-8 lg:grid lg:grid-cols-2 lg:py-8">
           <div className="p-2 font-light text-customNav sm:text-lg dark:text-customNavDark">
             <h3 className="mb-4 text-xl tracking-tight font-extrabold  text-active dark:text-customWhite">
               Frequently Asked Questions
