@@ -18,7 +18,7 @@ function Footer(props) {
           project has been able to accurately map and acknowledge the Indigenous
           territories and traditional lands. Visit their website at{" "}
           <a
-            className="text-active footer-link"
+            className="text-active hover:text-orangeHover"
             href="https://native-land.ca/"
             target="_blank"
             rel="noopener noreferrer"

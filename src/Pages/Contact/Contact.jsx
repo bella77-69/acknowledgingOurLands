@@ -30,7 +30,7 @@ function Contact() {
               </h2>
               <ul className="mt-4">
                 <li className="flex items-center">
-                  <div className="bg-customNav h-6 w-6 rounded-full flex items-center justify-center shrink-0">
+                  <div className="bg-customNav h-8 w-8 rounded-full flex items-center justify-center shrink-0">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20px"
