@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import learn from "../../assets/Images/learn.png";
-import "./LearnMore.css";
 
 const LearnMore = () => {
   const [isOpen, setIsOpen] = useState(null);

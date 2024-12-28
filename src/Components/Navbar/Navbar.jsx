@@ -7,7 +7,7 @@ import {
   MenuButton,
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import "./Navbar.css";
+import logo from "../../assets/Images/icon_one.png";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -30,7 +30,9 @@ export default function Navbar({ darkMode, setDarkMode }) {
         <div className="relative flex h-16 items-center justify-between">
           {/* Mobile Menu Button */}
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+            <DisclosureButton className="group relative inline-flex items-center justify-center
+             rounded-md p-2 text-customNavDark hover:bg-transparent hover:text-customWhite 
+             focus:outline-none focus:ring-2 focus:ring-inset focus:ring-customWhite">
               <span className="sr-only">Open main menu</span>
               <Bars3Icon
                 aria-hidden="true"
@@ -90,7 +92,13 @@ export default function Navbar({ darkMode, setDarkMode }) {
             <Menu as="div" className="relative ml-3">
               <div>
                 <MenuButton className="relative flex rounded-full text-sm focus:outline-none">
-                  <img className="size-8 rounded-full logo" />
+                  <a href="/">
+                    <img
+                      className="size-10 rounded-full"
+                      src={logo}
+                      alt="Placeholder for location icon"
+                    />
+                  </a>
                 </MenuButton>
               </div>
             </Menu>

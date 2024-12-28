@@ -1,29 +1,14 @@
-.logo {
-    display: block;
-    height: 50px;
-    width: 50px;
-    margin-right: 16px;
-    background-image: url("../../assets/Images/icon_one.png");
-    background-size: cover; 
-    background-position: center; 
-    border: none !important;
-  }
+.footer-link {
+  text-decoration: none;
+  transition: color 0.3s;
+}
 
-  .footer-link {
-    text-decoration: none;
-    transition: color 0.3s;
-  }
+.email-link {
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
 
-    .footer-link:hover {
-        color: #e38929;
-    }   
-  
-  .email-link {
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-  }
-
-    .email-link:hover {
-        color: #223232;
-    }
+.email-link:hover {
+  color: #223232;
+}

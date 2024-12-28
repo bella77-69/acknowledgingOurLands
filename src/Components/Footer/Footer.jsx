@@ -1,12 +1,19 @@
 import React from "react";
 import "./Footer.css";
+import logo from "../../assets/Images/icon_one.png";
 
 function Footer(props) {
   return (
     <footer className="bg-customNav">
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="flex justify-center">
-          <img className="size-8 rounded-full logo" />
+          <a href="/">
+            <img
+              className="size-10 rounded-full"
+              src={logo}
+              alt="Placeholder for location icon"
+            />
+          </a>
         </div>
 
         <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-customWhite">
@@ -14,7 +21,7 @@ function Footer(props) {
           reserved.
         </p>
         <p className="mx-auto mt-6 max-w-xl text-center leading-relaxed text-customWhite">
-        Thanks to the valuable dataset provided by Native Land Digital, our
+          Thanks to the valuable dataset provided by Native Land Digital, our
           project has been able to accurately map and acknowledge the Indigenous
           territories and traditional lands. Visit their website at{" "}
           <a
@@ -29,6 +36,15 @@ function Footer(props) {
         </p>
 
         <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
+          <li>
+            <a
+              className="text-customWhite transition hover:text-active"
+              href="/"
+            >
+              {" "}
+              Home{" "}
+            </a>
+          </li>
           <li>
             <a
               className="text-customWhite transition hover:text-active"
@@ -74,7 +90,7 @@ function Footer(props) {
               href="#"
               rel="noreferrer"
               target="_blank"
-            className="text-customWhite transition hover:text-active"
+              className="text-customWhite transition hover:text-active"
             >
               <span className="sr-only">Facebook</span>
               <svg
@@ -97,7 +113,7 @@ function Footer(props) {
               href="#"
               rel="noreferrer"
               target="_blank"
-        className="text-customWhite transition hover:text-active"
+              className="text-customWhite transition hover:text-active"
             >
               <span className="sr-only">Instagram</span>
               <svg
@@ -120,7 +136,7 @@ function Footer(props) {
               href="#"
               rel="noreferrer"
               target="_blank"
-            className="text-customWhite transition hover:text-active"
+              className="text-customWhite transition hover:text-active"
             >
               <span className="sr-only">Twitter</span>
               <svg
@@ -139,7 +155,7 @@ function Footer(props) {
               href="#"
               rel="noreferrer"
               target="_blank"
-            className="text-customWhite transition hover:text-active"
+              className="text-customWhite transition hover:text-active"
             >
               <span className="sr-only">GitHub</span>
               <svg
