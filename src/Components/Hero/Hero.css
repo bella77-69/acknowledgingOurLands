@@ -1,9 +1,4 @@
-:root {
-    --color-background-dark: rgba(0, 0, 0, 0.6);
-    --color-background-light: rgba(0, 0, 0, 0.4);
-  }
-
-  .hero {
+.hero {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -13,5 +8,5 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-  }
+}
   

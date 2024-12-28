@@ -2,8 +2,8 @@ import React from "react";
 
 function Contact() {
   return (
-    <section className="py-12 bg-customWhite dark:bg-darkNav sm:py-16 lg:py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-12 min-h-[60vh]  bg-customWhite dark:bg-darkNav sm:py-16 lg:py-20">
+      <div className="container mx-auto xs:px-2 px-2 md:px-12">
         <div className="text-center max-w-2xl mx-auto">
           <h1 className="text-3xl sm:text-4xl font-extrabold text-active dark:text-customWhite">
             Get in Touch

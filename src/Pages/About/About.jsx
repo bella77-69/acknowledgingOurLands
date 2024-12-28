@@ -7,7 +7,7 @@ import land3 from "../../assets/Images/land-landscape3.png";
 const About = () => {
   return (
     <section className="py-10 bg-customWhite dark:bg-darkNav sm:py-16 lg:py-20">
-      <div className="container mx-auto px-4">
+    <div className="container mx-auto xs:px-2 px-2 md:px-12">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto">
           <h1 className="text-2xl tracking-tight font-extrabold text-active dark:text-customWhite sm:text-4xl">

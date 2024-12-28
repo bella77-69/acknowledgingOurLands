@@ -4,8 +4,6 @@ import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import Main from "./Pages/Main/Main";
 import About from "./Pages/About/About";
-import Discover from "./Pages/Discover/Discover";
-// import Location from "./Pages/Discover/Location";
 import DiscoverLands from "./Pages/Discover/DiscoverLands";
 import LearnMore from "./Pages/LearnMore/LearnMore";
 import Contact from "./Pages/Contact/Contact";
@@ -21,20 +19,19 @@ function App() {
     } else {
       document.documentElement.classList.remove("dark");
     }
-    localStorage.setItem("darkMode", darkMode); 
+    localStorage.setItem("darkMode", darkMode);
   }, [darkMode]);
 
   return (
-    <div className="min-h-screen bg-customBlack dark:bg-darkBackground text-customWhite dark:text-darkText">
+    <div className=" text-customWhite dark:text-darkText">
       <BrowserRouter>
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/about" element={<About />} />
-          {/* <Route path="/location" element={<Location />} /> */}
-          <Route path="/discover" element={<DiscoverLands/>} />
-         <Route path="/learn-more" element={<LearnMore/>} />
-         <Route path="/contact" element={<Contact/>} />
+          <Route path="/discover" element={<DiscoverLands />} />
+          <Route path="/learn-more" element={<LearnMore />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
       </BrowserRouter>

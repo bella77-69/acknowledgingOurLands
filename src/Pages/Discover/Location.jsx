@@ -69,12 +69,13 @@ const Location = () => {
             Discover Indigenous Lands
           </h2>
           <p className="text-sm tracking-widest text-active dark:text-customWhite font-bold pt-4">
-            Detecting your current location and displaying a map with land acknowledgment details.
+            Detecting your current location and displaying a map with land
+            acknowledgment details.
           </p>
         </div>
 
         {latitude && longitude ? (
-               <div className="grid items-center grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-4 mt-12 sm:mt-20">
+          <div className="grid items-center grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-4 mt-12 sm:mt-20">
             <div className="space-y-8">
               <div className="flex items-start">
                 <svg
@@ -155,7 +156,7 @@ const Location = () => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                className="flex-shrink-0 w-6 h-6 text-active dark:text-customWhite"
+                  className="flex-shrink-0 w-6 h-6 text-active dark:text-customWhite"
                 >
                   <path
                     strokeLinecap="round"
@@ -188,26 +189,28 @@ const Location = () => {
                 </div>
               </div>
             </div>
-       
+
             {/* Map Component */}
             <div className="sm:col-span-1">
-            <MapContainer
-              center={[latitude, longitude]}
-              zoom={13}
-              style={{ height: "400px", width: "100%", marginTop: "20px" }}
-            >
-              <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              />
-              <Marker position={[latitude, longitude]}>
-                <Popup>
-                  You are here: {city} <br />
-                  Indigenous Lands:{" "}
-                  {indigenousLands.map((land) => land.properties.Name).join(", ") || "N/A"}
-                </Popup>
-              </Marker>
-            </MapContainer>
+              <MapContainer
+                center={[latitude, longitude]}
+                zoom={13}
+                style={{ height: "400px", width: "100%", marginTop: "20px" }}
+              >
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+                <Marker position={[latitude, longitude]}>
+                  <Popup>
+                    You are here: {city} <br />
+                    Indigenous Lands:{" "}
+                    {indigenousLands
+                      .map((land) => land.properties.Name)
+                      .join(", ") || "N/A"}
+                  </Popup>
+                </Marker>
+              </MapContainer>
             </div>
           </div>
         ) : error ? (
@@ -215,7 +218,9 @@ const Location = () => {
             Error: {error}
           </p>
         ) : (
-          <p className="text-gray-600 dark:text-gray-400">Loading location...</p>
+          <p className="text-gray-600 dark:text-gray-400">
+            Loading location...
+          </p>
         )}
       </div>
     </section>

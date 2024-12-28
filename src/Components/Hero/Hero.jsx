@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Hero() {
   return (
-    <div className="hero min-h-screen bg-hero-gradient bg-cover bg-center text-white">
+    <div className="hero min-h-[60vh] bg-hero-gradient bg-cover bg-center text-white">
       <div className="flex justify-center z-10 text-center">
         <div className="mx-auto max-w-4xl py-16 sm:py-24 lg:py-32">
           <div className="flex flex-col items-center">
@@ -26,12 +26,7 @@ export default function Hero() {
               >
                 Get Started
               </a>
-              <a
-                href="/learn-more"
-                className="text-base font-semibold text-customWhite hover:text-active"
-              >
-                Learn More <span aria-hidden="true">→</span>
-              </a>
+
             </div>
           </div>
         </div>
