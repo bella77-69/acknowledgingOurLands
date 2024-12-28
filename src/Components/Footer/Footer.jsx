@@ -32,7 +32,7 @@ function Footer(props) {
           <li>
             <a
               className="text-customWhite transition hover:text-active"
-              href="#"
+              href="/about"
             >
               {" "}
               About{" "}
@@ -42,17 +42,25 @@ function Footer(props) {
           <li>
             <a
               className="text-customWhite transition hover:text-active"
-              href="#"
+              href="/discover"
             >
               {" "}
               Discover{" "}
             </a>
           </li>
-
           <li>
             <a
               className="text-customWhite transition hover:text-active"
-              href="#"
+              href="/learn-more"
+            >
+              {" "}
+              Learn More{" "}
+            </a>
+          </li>
+          <li>
+            <a
+              className="text-customWhite transition hover:text-active"
+              href="/contact"
             >
               {" "}
               Contact{" "}
@@ -66,7 +74,7 @@ function Footer(props) {
               href="#"
               rel="noreferrer"
               target="_blank"
-            className="text-active transition hover:text-customWhite"
+            className="text-customWhite transition hover:text-active"
             >
               <span className="sr-only">Facebook</span>
               <svg
@@ -89,7 +97,7 @@ function Footer(props) {
               href="#"
               rel="noreferrer"
               target="_blank"
-       className="text-active transition hover:text-customWhite"
+        className="text-customWhite transition hover:text-active"
             >
               <span className="sr-only">Instagram</span>
               <svg
@@ -112,7 +120,7 @@ function Footer(props) {
               href="#"
               rel="noreferrer"
               target="_blank"
-              className="text-active transition hover:text-customWhite"
+            className="text-customWhite transition hover:text-active"
             >
               <span className="sr-only">Twitter</span>
               <svg
@@ -131,7 +139,7 @@ function Footer(props) {
               href="#"
               rel="noreferrer"
               target="_blank"
-              className="text-active transition hover:text-customWhite"
+            className="text-customWhite transition hover:text-active"
             >
               <span className="sr-only">GitHub</span>
               <svg
