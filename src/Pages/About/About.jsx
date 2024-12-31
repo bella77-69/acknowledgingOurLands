@@ -6,74 +6,97 @@ import land3 from "../../assets/Images/land-landscape3.png";
 
 const About = () => {
   return (
-    <section className="py-10 bg-customWhite dark:bg-darkNav sm:py-16 lg:py-20">
-    <div className="container mx-auto xs:px-2 px-2 md:px-12">
+    <section className="py-10 sm:py-16 lg:py-20 bg-gradient-to-b from-customWhite to-gray-100 dark:from-darkNav dark:to-gray-800">
+      <div className="container mx-auto xs:px-3 px-2 md:px-12">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto">
+        <div className="text-center mb-12">
           <h1 className="text-2xl tracking-tight font-extrabold text-active dark:text-customWhite sm:text-4xl">
             About Us
           </h1>
+          <p className="mt-4 text-gray-600 dark:text-gray-300 sm:text-lg">
+            Discover the significance of territory acknowledgment and our mission to promote reconciliation and understanding.
+          </p>
         </div>
 
         {/* Content Section 1 */}
-        <div className="grid gap-16 items-center py-8 mx-auto max-w-screen-xl lg:grid-cols-2 lg:py-16">
-          <div className="font-light text-customNav sm:text-lg dark:text-customNavDark">
-            <p className="mb-4">
+        <div className="relative flex flex-col lg:flex-row items-center lg:items-start mb-16">
+          {/* Text Content */}
+          <div className="lg:w-1/2 lg:pr-8">
+            <div className="bg-customWhite dark:bg-gray-900 p-6 rounded-lg shadow-md">
+              <p className="text-gray-700 dark:text-gray-200 mb-4">
               <span className="font-black text-xl text-active dark:text-customWhite">
-                Territory acknowledgment is{" "}
-              </span>
-              crucial to respecting Indigenous presence and land rights,
-              highlighting the ongoing impacts of colonialism. It's vital during
-              events to express solidarity, fostering reconciliation and promoting
-              a deeper understanding of Indigenous history and culture.
-            </p>
-            <p>
-              However, we understand the significance of going beyond mere token
-              gestures. Our app emphasizes meaningful actions, urging settlers to
-              reflect on privileges shaped by historical colonial injustices.
-              Recognize that these privileges result from Indigenous dispossession
-              and marginalization.
-            </p>
+                  Territory acknowledgment is{" "}
+                </span>
+                crucial to respecting Indigenous presence and land rights,
+                highlighting the ongoing impacts of colonialism. It fosters
+                reconciliation and promotes a deeper understanding of Indigenous history and culture.
+              </p>
+              <p className="text-gray-700 dark:text-gray-200">
+                Our app emphasizes meaningful actions, urging settlers to reflect on privileges shaped by historical colonial injustices. Recognize these privileges stem from Indigenous dispossession and marginalization.
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <img className="w-full rounded-lg object-cover" src={land} alt="Beautiful landscape of Indigenous land" />
-            <img className="mt-4 w-full lg:mt-10 rounded-lg object-cover" src={land1} alt="Another view of Indigenous land" />
+          {/* Images */}
+          <div className="relative lg:w-1/2 mt-10 lg:mt-0">
+            <div className="absolute -top-8 -left-4 lg:-top-16 lg:-left-8 w-40 h-40 lg:w-60 lg:h-60 bg-customNav opacity-20 rounded-full"></div>
+            <div className="relative grid grid-cols-2 gap-4">
+              <img
+                className="rounded-lg object-cover shadow-lg transform hover:scale-105 transition duration-300"
+                src={land}
+                alt="Beautiful landscape of Indigenous land"
+              />
+              <img
+                className="rounded-lg object-cover shadow-lg transform hover:scale-105 transition duration-300"
+                src={land1}
+                alt="Another view of Indigenous land"
+              />
+            </div>
           </div>
         </div>
 
         {/* Content Section 2 */}
-        <div className="grid gap-16 items-center py-8 mx-auto max-w-screen-xl lg:grid-cols-2 lg:py-16">
-          <div className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
-            <p className="mb-4">
-              <span className="tracking-tight font-extrabold text-xl text-active dark:text-customWhite">
-                With Acknowledging Our Lands,{" "}
-              </span>
-              we aim to promote understanding and empathy. By helping you identify
-              your location and providing information on the Indigenous territories
-              you are on, our app encourages a deeper connection to the land and
-              its history. We believe that this awareness can lead to more informed
-              and respectful territory acknowledgments.
-            </p>
-            <p>
-              Let's take a step forward in supporting reconciliation efforts and
-              working towards a society that acknowledges and honors Indigenous
-              rights and sovereignty. Download our app today and join us in making
-              a positive impact through meaningful territory acknowledgments.
-            </p>
+        <div className="relative flex flex-col lg:flex-row-reverse items-center lg:items-start">
+          {/* Text Content */}
+          <div className="lg:w-1/2 lg:pl-8">
+            <div className="bg-customWhite dark:bg-gray-900 p-6 rounded-lg shadow-md">
+              <p className=" text-gray-700 dark:text-gray-200 mb-4">
+              <span className="font-black text-xl text-active dark:text-customWhite">
+                  With Acknowledging Our Lands,{" "}
+                </span>
+                we aim to promote understanding and empathy. Our app helps you identify your location and provides information on the Indigenous territories you are on.
+              </p>
+              <p className="text-gray-700 dark:text-gray-200">
+                Join us in supporting reconciliation efforts and creating a society that acknowledges and honors Indigenous rights and sovereignty.
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <img className="w-full rounded-lg object-cover" src={land2} alt="Cultural Indigenous landscape" />
-            <img className="mt-4 w-full lg:mt-10 rounded-lg object-cover" src={land3} alt="Stunning view of Indigenous heritage site" />
+          {/* Images */}
+          <div className="relative lg:w-1/2 mt-10 lg:mt-0">
+            <div className="absolute -top-8 -right-4 lg:-top-16 lg:-right-8 w-40 h-40 lg:w-60 lg:h-60 bg-customNav opacity-20 rounded-full"></div>
+            <div className="relative grid grid-cols-2 gap-4">
+              <img
+                className="rounded-lg object-cover shadow-lg transform hover:scale-105 transition duration-300"
+                src={land2}
+                alt="Cultural Indigenous landscape"
+              />
+              <img
+                className="rounded-lg object-cover shadow-lg transform hover:scale-105 transition duration-300"
+                src={land3}
+                alt="Stunning view of Indigenous heritage site"
+              />
+            </div>
           </div>
         </div>
 
         {/* Call to Action */}
-        <div className="text-center py-4">
+        <div className="text-center py-10">
           <a
             href="/learn-more"
-            className="inline-flex items-center justify-center gap-x-2 px-6 py-2 text-sm font-bold text-customWhite bg-customNav rounded-lg hover:bg-buttonHover transition ease-in-out duration-300"
+            className="inline-flex items-center justify-center gap-x-2 px-6 py-3 text-sm font-bold text-customWhite 
+            bg-customNav rounded-lg hover:bg-buttonHover
+            shadow-lg transform hover:scale-105 transition duration-300"
           >
             Learn More
             <svg
