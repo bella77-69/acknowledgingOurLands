@@ -275,6 +275,7 @@ const DiscoverLands = () => {
     "We are gathered on the traditional and unceded territories of the ",
     "We are meeting on the traditional and unceded territories of the ",
   ];
+  
 
   const changeAcknowledgment = () => {
     setCurrentAcknowledgmentIndex((prevIndex) =>
@@ -340,29 +341,40 @@ const DiscoverLands = () => {
               <p className="text-gray-700 dark:text-gray-300">No Indigenous Lands data available.</p>
             )}
           </div>
+          {/* Circle Background */}
+          <div className="absolute -bottom-8 -right-4 lg:-bottom-0 lg:-right-20 w-40 h-40 lg:w-60 lg:h-60 bg-customNav opacity-20 rounded-full"></div>
         </div>
   
         {/* Right Column: Map */}
+        
         <div className="relative lg:col-span-1 mt-8">
+            {/* Circle Background
+            <div className="absolute -top-2 -right-4 lg:-top-0 lg:-right-20 w-40 h-40 lg:w-60 lg:h-60 bg-customNav opacity-20 rounded-full"></div> */}
     {latitude && longitude ? (
       <MapContainer
         center={[latitude, longitude]}
         zoom={13}
         className="h-[450px] w-full"  // Adjust height and make it full-width
       >
+        
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        
         <Marker position={[latitude, longitude]}>
           <Popup>
             You are here: {latitude}, {longitude}
           </Popup>
         </Marker>
       </MapContainer>
+      
     ) : (
+      
       <div className="flex items-center justify-center h-[450px]">
+        
         <p className="text-textGreyDark dark:text-textGrey">
           Map will appear here once location is fetched.
         </p>
       </div>
+      
     )}
   </div>
 </div>
@@ -370,25 +382,32 @@ const DiscoverLands = () => {
   
       {/* Land Acknowledgment Section */}
       <div className="mt-12 text-center">
+       
         <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
           Land Acknowledgment
         </h2>
+       
         <p className="mt-4 text-gray-700 dark:text-gray-300">
+           
           {acknowledgmentVariations[currentAcknowledgmentIndex]}
-          {indigenousLands.map((land, index) => (
-            <React.Fragment key={index}>
-              {index > 0 && ", "}
-              {land?.properties?.Name || "Unknown Land"}
-            </React.Fragment>
-          ))}
+          <span>
+                 {indigenousLands.map((land, index) => (
+                  <React.Fragment key={land?.properties?.Name || index}>
+                    {index > 0 && ", "}
+                    {land?.properties?.Name || "Unknown Land"}
+                  </React.Fragment>
+                ))}
+              </span>
           {` First Nations.`}
         </p>
+         
         <button
           onClick={changeAcknowledgment}
           className="bg-customNav text-customWhite font-bold py-3 px-6 rounded-lg mt-3 hover:bg-buttonHover hover:text-customWhite transition ease-in-out duration-300"
         >
           Generate New Acknowledgment
         </button>
+        
       </div>
     </div>
   </section>
