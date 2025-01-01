@@ -7,6 +7,7 @@ import About from "./Pages/About/About";
 import DiscoverLands from "./Pages/Discover/DiscoverLands";
 import LearnMore from "./Pages/LearnMore/LearnMore";
 import Contact from "./Pages/Contact/Contact";
+import Login from "./Pages/Login/Login"; // Import the Login page
 
 function App() {
   const [darkMode, setDarkMode] = useState(
@@ -23,7 +24,7 @@ function App() {
   }, [darkMode]);
 
   return (
-    <div className=" text-customWhite dark:text-darkText">
+    <div className="text-customWhite dark:text-darkText">
       <BrowserRouter>
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
         <Routes>
@@ -32,6 +33,7 @@ function App() {
           <Route path="/discover" element={<DiscoverLands />} />
           <Route path="/learn-more" element={<LearnMore />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />
       </BrowserRouter>
