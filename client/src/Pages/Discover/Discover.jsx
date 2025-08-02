@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-const your_api_key= import.meta.env.VITE_API_KEY;
+import { useEffect, useState } from "react";
+const your_api_key = import.meta.env.VITE_OPENCAGE_API_KEY;
 
 const Discover = () => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [error, setError] = useState(null);
-
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -18,7 +17,6 @@ const Discover = () => {
           console.log("Longitude is :", longitude);
         },
         (error) => setError("Location access denied.")
-        
       );
     } else {
       setError("Geolocation is not supported by this browser.");
@@ -36,7 +34,7 @@ const Discover = () => {
       <h1 className="text-xl font-bold text-gray-800 dark:text-white">
         Native Land Map
       </h1>
- 
+
       {error && (
         <p className="text-red-500">
           {error} Please check your browser's location permissions.
@@ -59,4 +57,3 @@ const Discover = () => {
 };
 
 export default Discover;
-

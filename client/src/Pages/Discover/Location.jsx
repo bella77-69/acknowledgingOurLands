@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Discover from "./Discover";
-const apiKey = import.meta.env.VITE_API_KEY;
+const apiKey = import.meta.env.VITE_OPENCAGE_API_KEY;
 
 const Location = () => {
   const [latitude, setLatitude] = useState(null);

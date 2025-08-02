@@ -1,4 +1,3 @@
-import React from "react";
 import land from "../../assets/Images/land-landscape.png";
 import land1 from "../../assets/Images/land-landscape1.png";
 import land2 from "../../assets/Images/land-landscape2.png";
@@ -14,7 +13,8 @@ const About = () => {
             About Us
           </h1>
           <p className="mt-4 text-gray-600 dark:text-gray-300 sm:text-lg">
-            Discover the significance of territory acknowledgment and our mission to promote reconciliation and understanding.
+            Discover the significance of territory acknowledgment and our
+            mission to promote reconciliation and understanding.
           </p>
         </div>
 
@@ -24,15 +24,19 @@ const About = () => {
           <div className="lg:w-1/2 lg:pr-8">
             <div className="bg-customWhite dark:bg-gray-900 p-6 rounded-lg shadow-md">
               <p className="text-gray-700 dark:text-gray-200 mb-4">
-              <span className="font-black text-xl text-active dark:text-customWhite">
+                <span className="font-black text-xl text-active dark:text-customWhite">
                   Territory acknowledgment is{" "}
                 </span>
                 crucial to respecting Indigenous presence and land rights,
                 highlighting the ongoing impacts of colonialism. It fosters
-                reconciliation and promotes a deeper understanding of Indigenous history and culture.
+                reconciliation and promotes a deeper understanding of Indigenous
+                history and culture.
               </p>
               <p className="text-gray-700 dark:text-gray-200">
-                Our app emphasizes meaningful actions, urging settlers to reflect on privileges shaped by historical colonial injustices. Recognize these privileges stem from Indigenous dispossession and marginalization.
+                Our app emphasizes meaningful actions, urging settlers to
+                reflect on privileges shaped by historical colonial injustices.
+                Recognize these privileges stem from Indigenous dispossession
+                and marginalization.
               </p>
             </div>
           </div>
@@ -61,13 +65,17 @@ const About = () => {
           <div className="lg:w-1/2 lg:pl-8">
             <div className="bg-customWhite dark:bg-gray-900 p-6 rounded-lg shadow-md">
               <p className=" text-gray-700 dark:text-gray-200 mb-4">
-              <span className="font-black text-xl text-active dark:text-customWhite">
+                <span className="font-black text-xl text-active dark:text-customWhite">
                   With Acknowledging Our Lands,{" "}
                 </span>
-                we aim to promote understanding and empathy. Our app helps you identify your location and provides information on the Indigenous territories you are on.
+                we aim to promote understanding and empathy. Our app helps you
+                identify your location and provides information on the
+                Indigenous territories you are on.
               </p>
               <p className="text-gray-700 dark:text-gray-200">
-                Join us in supporting reconciliation efforts and creating a society that acknowledges and honors Indigenous rights and sovereignty.
+                Join us in supporting reconciliation efforts and creating a
+                society that acknowledges and honors Indigenous rights and
+                sovereignty.
               </p>
             </div>
           </div>

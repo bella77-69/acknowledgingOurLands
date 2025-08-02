@@ -1,5 +1,3 @@
-import React from "react";
-
 function Contact() {
   return (
     <section className="py-12 min-h-[60vh]  bg-customWhite dark:bg-darkNav sm:py-16 lg:py-20">

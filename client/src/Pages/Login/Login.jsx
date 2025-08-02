@@ -1,29 +1,54 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import backgroundImage from "../../assets/Images/hero.png";
+
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError("");
+    console.log("Attempting login with:", { username, password });
+    // Basic validation
+    if (!username.trim() || !password.trim()) {
+      setError("Please enter both username and password");
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch("http://localhost:5000/auth/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ username, password }),
       });
+
       const data = await response.json();
+
       if (!response.ok) {
-        setError(data.error || "Login failed");
-      } else {
-        localStorage.setItem("token", data.token); // Store token
-        navigate("/"); // Redirect to home or dashboard
+        throw new Error(data.error || "Login failed. Please try again.");
       }
+
+      // Store token in both localStorage and memory
+      localStorage.setItem("token", data.token);
+      if (data.user) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+      }
+
+      // Redirect to home or dashboard
+      navigate("/", { replace: true });
     } catch (err) {
-      setError("Something went wrong");
+      console.error("Login error:", err);
+      setError(err.message || "Login failed. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -46,21 +71,29 @@ function Login() {
           {/* Text and Form Content */}
           <div className="lg:w-1/2 lg:pr-8">
             <div className="bg-customWhite dark:bg-gray-900 p-6 rounded-lg shadow-md">
+              {error && (
+                <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                  {error}
+                </div>
+              )}
+
               <form className="space-y-6" onSubmit={handleLogin}>
                 <div>
                   <label
-                    htmlFor="email"
+                    htmlFor="username"
                     className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                   >
                     Username
                   </label>
                   <input
+                    id="username"
                     type="text"
                     placeholder="Username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-customNav focus:border-customNav dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
                     required
+                    autoComplete="username"
                   />
                 </div>
 
@@ -72,45 +105,27 @@ function Login() {
                     Password
                   </label>
                   <input
+                    id="password"
                     type="password"
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-customNav focus:border-customNav dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
                     required
+                    autoComplete="current-password"
                   />
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <input
-                      id="remember-me"
-                      type="checkbox"
-                      className="h-4 w-4 text-customNav focus:ring-customNav border-gray-300 rounded"
-                    />
-                    <label
-                      htmlFor="remember-me"
-                      className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
-                    >
-                      Remember me
-                    </label>
-                  </div>
-
-                  <div className="text-sm">
-                    <a
-                      href="/forgot-password"
-                      className="font-medium text-customNav hover:text-buttonHover"
-                    >
-                      Forgot your password?
-                    </a>
-                  </div>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full px-6 py-3 text-sm font-bold text-customWhite bg-customNav rounded-lg hover:bg-buttonHover shadow-lg transform hover:scale-105 transition duration-300"
+                  disabled={isLoading}
+                  className={`w-full px-6 py-3 text-sm font-bold text-customWhite bg-customNav rounded-lg hover:bg-buttonHover shadow-lg transform transition duration-300 ${
+                    isLoading
+                      ? "opacity-75 cursor-not-allowed"
+                      : "hover:scale-105"
+                  }`}
                 >
-                  Sign In
+                  {isLoading ? "Signing In..." : "Sign In"}
                 </button>
               </form>
             </div>
@@ -150,28 +165,6 @@ function Login() {
         </div>
       </div>
     </section>
-
-    // <div className="login-page">
-    //   <h1>Login</h1>
-    //   <form onSubmit={handleLogin}>
-    //     <input
-    //       type="text"
-    //       placeholder="Username"
-    //       value={username}
-    //       onChange={(e) => setUsername(e.target.value)}
-    //       required
-    //     />
-    //     <input
-    //       type="password"
-    //       placeholder="Password"
-    //       value={password}
-    //       onChange={(e) => setPassword(e.target.value)}
-    //       required
-    //     />
-    //     {error && <p className="error">{error}</p>}
-    //     <button type="submit">Login</button>
-    //   </form>
-    // </div>
   );
 }
 

@@ -19,20 +19,58 @@ router.post('/register', async (req, res) => {
 
 // Login
 router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-    try {
-        const user = await User.findOne({ where: { username } });
-        if (!user) return res.status(404).json({ error: 'User not found' });
+  console.log('Login attempt with:', req.body); // Log incoming request
+  
+  const { username, password } = req.body;
+  if (!username || !password) {
+    console.log('Missing credentials');
+    return res.status(400).json({ error: 'Username and password required' });
+  }
 
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return res.status(400).json({ error: 'Invalid credentials' });
-
-        const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '1h' });
-        res.status(200).json({ token });
-    } catch (err) {
-        res.status(500).json({ error: 'Login failed' });
+  try {
+    const user = await User.findOne({ 
+      where: { username },
+      attributes: ['id', 'username', 'password'] // Explicitly select fields
+    });
+    
+    console.log('Found user:', user ? user.username : 'none');
+    
+    if (!user) {
+      console.log('User not found');
+      return res.status(401).json({ error: 'Invalid username or password' });
     }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    console.log('Password match:', isMatch);
+    
+    if (!isMatch) {
+      return res.status(401).json({ error: 'Invalid username or password' });
+    }
+
+    const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '1h' });
+    console.log('Login successful for:', user.username);
+    
+    res.json({ token, user: { id: user.id, username: user.username } });
+  } catch (err) {
+    console.error('Login error:', err);
+    res.status(500).json({ error: 'Server error during login' });
+  }
 });
+// router.post('/login', async (req, res) => {
+//     const { username, password } = req.body;
+//     try {
+//         const user = await User.findOne({ where: { username } });
+//         if (!user) return res.status(404).json({ error: 'User not found' });
+
+//         const isMatch = await bcrypt.compare(password, user.password);
+//         if (!isMatch) return res.status(400).json({ error: 'Invalid credentials' });
+
+//         const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '1h' });
+//         res.status(200).json({ token });
+//     } catch (err) {
+//         res.status(500).json({ error: 'Login failed' });
+//     }
+// });
 
 // Save Land Acknowledgment
 router.post('/acknowledgments', async (req, res) => {
