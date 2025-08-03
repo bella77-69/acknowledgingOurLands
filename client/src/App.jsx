@@ -7,11 +7,12 @@ import About from "./Pages/About/About";
 import DiscoverLands from "./Pages/Discover/DiscoverLands";
 import LearnMore from "./Pages/LearnMore/LearnMore";
 import Contact from "./Pages/Contact/Contact";
-import Login from "./Pages/Login/Login"; // Import the Login page
+import Login from "./Pages/Login/Login";
+import Register from "./Pages/Register/Register";
 
 function App() {
   const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("darkMode") === "true" // Check user preference on load
+    localStorage.getItem("darkMode") === "true"
   );
 
   useEffect(() => {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/learn-more" element={<LearnMore />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
         <Footer />
       </BrowserRouter>

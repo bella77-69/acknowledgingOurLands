@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Hero() {
   return (
-    <div className="hero min-h-[60vh] bg-hero-gradient bg-cover bg-center text-white">
+    <div className="hero min-h-[60vh] bg-hero-gradient dark:bg-hero-gradient-dark bg-cover bg-center text-primary dark:text-darkText">
       <div className="flex justify-center z-10 text-center">
         <div className="mx-auto max-w-4xl py-16 sm:py-24 lg:py-32">
           <div className="flex flex-col items-center">
@@ -10,7 +10,7 @@ export default function Hero() {
               Acknowledging Our Lands
             </h1>
 
-            <p className="mb-6 max-w-xxl text-sm text-customWhite px-2 xs:px-4 md:px-8 sm:text-xl md:mb-10 lg:mb-12">
+            <p className="mb-6 max-w-xxl text-sm text-secondary dark:text-secondary px-2 xs:px-4 md:px-8 sm:text-xl md:mb-10 lg:mb-12">
               Acknowledging Our Lands is an app designed to help you identify
               the Indigenous lands you are on and create meaningful land
               acknowledgments. Land acknowledgments recognize the deep
@@ -22,11 +22,10 @@ export default function Hero() {
             <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="/discover"
-                className="rounded-lg bg-customNav px-6 py-3 text-base font-semibold text-customWhite shadow-lg hover:bg-active focus:outline-none transition"
+                className="rounded-lg bg-accent hover:bg-accent-hover px-6 py-3 text-base font-semibold text-white shadow-lg focus:outline-none transition"
               >
                 Get Started
               </a>
-
             </div>
           </div>
         </div>

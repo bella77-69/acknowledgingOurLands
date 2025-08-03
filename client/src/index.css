@@ -1,3 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light mode variables (RGB values) */
+    --color-text-primary: 18 18 18;  /* #121212 */
+    --color-text-secondary: 74 99 99;  /* #4A6363 */
+    --color-bg-primary: 255 252 247;  /* #FFFCF7 */
+    --color-bg-secondary: 245 243 240;  /* #F5F3F0 */
+    --color-accent: 74 99 99;  /* #4A6363 */
+    --color-accent-hover: 45 65 65;  /* #2D4141 */
+  }
+
+  .dark {
+    /* Dark mode variables (RGB values) */
+    --color-text-primary: 240 240 240;  /* #F0F0F0 */
+    --color-text-secondary: 138 158 158;  /* #8A9E9E */
+    --color-bg-primary: 10 13 18;  /* #0A0D12 */
+    --color-bg-secondary: 23 34 40;  /* #172228 */
+    --color-accent: 138 158 158;  /* #8A9E9E */
+    --color-accent-hover: 87 107 107;  /* #576B6B */
+  }
+
+  body {
+    @apply bg-primary text-primary font-sans;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+@layer utilities {
+  .text-transparent-primary {
+    color: rgb(var(--color-text-primary) / var(--tw-text-opacity, 1));
+  }
+  
+  .text-transparent-secondary {
+    color: rgb(var(--color-text-secondary) / var(--tw-text-opacity, 1));
+  }
+}

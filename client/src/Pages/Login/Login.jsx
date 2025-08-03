@@ -22,7 +22,7 @@ function Login() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/auth/login", {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -145,7 +145,7 @@ function Login() {
         {/* Call to Action */}
         <div className="text-center py-10">
           <a
-            href="/signup"
+            href="/register"
             className="inline-flex items-center justify-center gap-x-2 px-6 py-3 text-sm font-bold text-customWhite bg-customNav rounded-lg hover:bg-buttonHover shadow-lg transform hover:scale-105 transition duration-300"
           >
             Create an Account
