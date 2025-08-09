@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -14,6 +15,9 @@ const DiscoverLands = () => {
   const [error, setError] = useState(null);
   const [currentAcknowledgmentIndex, setCurrentAcknowledgmentIndex] =
     useState(0);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -74,6 +78,53 @@ const DiscoverLands = () => {
     setCurrentAcknowledgmentIndex((prevIndex) =>
       prevIndex === acknowledgmentVariations.length - 1 ? 0 : prevIndex + 1
     );
+  };
+
+  const handleSaveAcknowledgment = async () => {
+    if (!indigenousLands.length) return;
+
+    setIsSaving(true);
+    setSaveSuccess(false);
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        navigate("/login", { state: { from: "/discover" } });
+        return;
+      }
+
+      const acknowledgmentText = `${
+        acknowledgmentVariations[currentAcknowledgmentIndex]
+      }${indigenousLands
+        .map((land) => land?.properties?.Name)
+        .join(", ")} First Nations.`;
+
+      await axios.post(
+        "http://localhost:5000/api/acknowledgments",
+        {
+          title: `Acknowledgment for ${city}`,
+          content: acknowledgmentText,
+          location: city,
+          tags: indigenousLands.map((land) => land?.properties?.Name),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      setSaveSuccess(true);
+      setTimeout(() => setSaveSuccess(false), 3000);
+    } catch (error) {
+      console.error("Error saving acknowledgment:", error);
+      setError(
+        error.response?.data?.message || "Failed to save acknowledgment"
+      );
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -196,12 +247,42 @@ const DiscoverLands = () => {
             {` First Nations.`}
           </p>
 
-          <button
+          {/* <button
             onClick={changeAcknowledgment}
             className="bg-customNav text-customWhite font-bold py-3 px-6 rounded-lg mt-3 hover:bg-buttonHover hover:text-customWhite transition ease-in-out duration-300"
           >
             Generate New Acknowledgment
-          </button>
+          </button> */}
+          <div className="mt-6 flex flex-col sm:flex-row justify-center gap-4">
+            <button
+              onClick={changeAcknowledgment}
+              className="bg-customNav text-customWhite font-bold py-3 px-6 rounded-lg hover:bg-buttonHover transition duration-300"
+            >
+              Generate New Acknowledgment
+            </button>
+
+            <button
+              onClick={handleSaveAcknowledgment}
+              disabled={isSaving || !indigenousLands.length}
+              className={`bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300 ${
+                isSaving || !indigenousLands.length
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
+              }`}
+            >
+              {isSaving ? "Saving..." : "Save Acknowledgment"}
+            </button>
+          </div>
+
+          {/* Add status messages */}
+          <div className="mt-4 text-center">
+            {saveSuccess && (
+              <p className="text-green-600 dark:text-green-400">
+                Acknowledgment saved successfully!
+              </p>
+            )}
+            {error && <p className="text-red-500 dark:text-red-400">{error}</p>}
+          </div>
         </div>
       </div>
     </section>

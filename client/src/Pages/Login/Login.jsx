@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import backgroundImage from "../../assets/Images/hero.png";
 
 function Login() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -13,40 +13,45 @@ function Login() {
     e.preventDefault();
     setIsLoading(true);
     setError("");
-    console.log("Attempting login with:", { username, password });
-    // Basic validation
-    if (!username.trim() || !password.trim()) {
-      setError("Please enter both username and password");
+
+    if (!email.trim() || !password.trim()) {
+      setError("Please enter both email and password");
       setIsLoading(false);
       return;
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch("http://localhost:5000/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Login failed. Please try again.");
+        // More specific error messages based on status code
+        if (response.status === 401) {
+          throw new Error(data.error || "Invalid email or password");
+        } else if (response.status === 500) {
+          throw new Error("Server error. Please try again later.");
+        } else {
+          throw new Error(data.error || "Login failed. Please try again.");
+        }
       }
 
-      // Store token in both localStorage and memory
+      // Store token and user data
       localStorage.setItem("token", data.token);
       if (data.user) {
         localStorage.setItem("user", JSON.stringify(data.user));
       }
 
-      // Redirect to home or dashboard
-      navigate("/", { replace: true });
+      navigate("/dashboard", { replace: true });
     } catch (err) {
       console.error("Login error:", err);
-      setError(err.message || "Login failed. Please try again.");
+      setError(err.message || "An unexpected error occurred during login.");
     } finally {
       setIsLoading(false);
     }
@@ -80,20 +85,20 @@ function Login() {
               <form className="space-y-6" onSubmit={handleLogin}>
                 <div>
                   <label
-                    htmlFor="username"
+                    htmlFor="email"
                     className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                   >
-                    Username
+                    email
                   </label>
                   <input
-                    id="username"
+                    id="email"
                     type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-customNav focus:border-customNav dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
                     required
-                    autoComplete="username"
+                    autoComplete="email"
                   />
                 </div>
 

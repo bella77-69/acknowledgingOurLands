@@ -9,6 +9,7 @@ import LearnMore from "./Pages/LearnMore/LearnMore";
 import Contact from "./Pages/Contact/Contact";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
+import Dashboard from "./Pages/Dashboard/Dashboard";
 
 function App() {
   const [darkMode, setDarkMode] = useState(
@@ -36,6 +37,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
         <Footer />
       </BrowserRouter>

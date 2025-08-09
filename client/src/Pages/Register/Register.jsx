@@ -4,6 +4,7 @@ import axios from "axios";
 
 export default function Register() {
   const [formData, setFormData] = useState({
+    full_name: "",
     username: "",
     email: "",
     password: "",
@@ -24,29 +25,46 @@ export default function Register() {
     e.preventDefault();
     setError("");
 
+    // Validation
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
       return;
     }
 
+    if (formData.password.length < 8) {
+      setError("Password must be at least 8 characters");
+      return;
+    }
+
     try {
       setLoading(true);
-      const response = await axios.post(
-        "http://localhost:3001/api/auth/register",
-        {
-          username: formData.username,
-          email: formData.email,
-          password: formData.password,
-        }
-      );
 
-      // Store the token and redirect
+      const response = await axios.post("http://localhost:5000/api/register", {
+        full_name: formData.full_name,
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+      });
+
+      // Store token and basic user data
       localStorage.setItem("token", response.data.token);
-      navigate("/");
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+
+      // Redirect to dashboard or home page
+      navigate("/dashboard", { replace: true });
     } catch (err) {
-      setError(
-        err.response?.data?.message || "Registration failed. Please try again."
-      );
+      // Handle different error cases
+      if (err.response) {
+        if (err.response.status === 409) {
+          setError("Email or username already exists");
+        } else {
+          setError(err.response.data.error || "Registration failed");
+        }
+      } else if (err.request) {
+        setError("No response from server. Please try again.");
+      } else {
+        setError("An unexpected error occurred");
+      }
     } finally {
       setLoading(false);
     }
@@ -80,6 +98,25 @@ export default function Register() {
           <div className="rounded-md shadow-sm space-y-4">
             <div>
               <label
+                htmlFor="full_name"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Full Name
+              </label>
+              <input
+                id="full_name"
+                name="full_name"
+                type="text"
+                required
+                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700"
+                placeholder="Your full name"
+                value={formData.full_name}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div>
+              <label
                 htmlFor="username"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300"
               >
@@ -90,6 +127,7 @@ export default function Register() {
                 name="username"
                 type="text"
                 required
+                minLength="3"
                 className="appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700"
                 placeholder="Username"
                 value={formData.username}
@@ -129,8 +167,9 @@ export default function Register() {
                 name="password"
                 type="password"
                 required
+                minLength="8"
                 className="appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700"
-                placeholder="Password"
+                placeholder="Password (min 8 characters)"
                 value={formData.password}
                 onChange={handleChange}
               />
@@ -148,6 +187,7 @@ export default function Register() {
                 name="confirmPassword"
                 type="password"
                 required
+                minLength="8"
                 className="appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700"
                 placeholder="Confirm Password"
                 value={formData.confirmPassword}
@@ -164,7 +204,33 @@ export default function Register() {
                 loading ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
-              {loading ? "Registering..." : "Register"}
+              {loading ? (
+                <>
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  Registering...
+                </>
+              ) : (
+                "Register"
+              )}
             </button>
           </div>
         </form>
