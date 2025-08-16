@@ -1,68 +1,17 @@
-// Change from named exports to default export
-const acknowledgmentController = {
-  create: async (req, res) => {
-    try {
-      const { title, content, location, tags } = req.body;
-      const acknowledgmentId = await createAcknowledgment(
-        req.user.id,
-        title,
-        content,
-        location,
-        tags || []
-      );
-      res.status(201).json({ id: acknowledgmentId });
-    } catch (error) {
-      res.status(500).json({ message: 'Server error' });
-    }
-  },
+const pool = require("../config/db");
 
-  getAll: async (req, res) => {
-    try {
-      const acknowledgments = await getUserAcknowledgments(req.user.id);
-      res.json(acknowledgments);
-    } catch (error) {
-      res.status(500).json({ message: 'Server error' });
-    }
-  },
-
-  update: async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { title, content, location, tags } = req.body;
-      
-      const affectedRows = await updateAcknowledgment(
-        id,
-        req.user.id,
-        title,
-        content,
-        location,
-        tags || []
-      );
-      
-      if (affectedRows === 0) {
-        return res.status(404).json({ message: 'Acknowledgment not found' });
-      }
-      
-      res.json({ success: true });
-    } catch (error) {
-      res.status(500).json({ message: 'Server error' });
-    }
-  },
-
-  remove: async (req, res) => {
-    try {
-      const { id } = req.params;
-      const affectedRows = await deleteAcknowledgment(id, req.user.id);
-      
-      if (affectedRows === 0) {
-        return res.status(404).json({ message: 'Acknowledgment not found' });
-      }
-      
-      res.json({ success: true });
-    } catch (error) {
-      res.status(500).json({ message: 'Server error' });
-    }
-  }
+exports.createAcknowledgment = async (req, res) => {
+  const { content } = req.body;
+  await pool.query("INSERT INTO acknowledgments (user_id, content) VALUES (?, ?)", [
+    req.user.id,
+    content,
+  ]);
+  res.json({ message: "Acknowledgment saved" });
 };
 
-export default acknowledgmentController;
+exports.getAcknowledgments = async (req, res) => {
+  const [rows] = await pool.query("SELECT * FROM acknowledgments WHERE user_id = ?", [
+    req.user.id,
+  ]);
+  res.json(rows);
+};

@@ -7,6 +7,8 @@ import {
   MenuButton,
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../../Context/AuthContext";
 import logo from "../../assets/Images/icon_one.png";
 
 const navigation = [
@@ -21,14 +23,12 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Navbar({
-  darkMode,
-  setDarkMode,
-  isLoggedIn,
-  username,
-  handleLogout,
-}) {
+export default function Navbar({ darkMode, setDarkMode }) {
   const location = useLocation();
+  const { isLoggedIn, user, logout } = useContext(AuthContext);
+
+  // Force re-render when login state changes
+  useEffect(() => {}, [isLoggedIn]);
 
   return (
     <Disclosure as="nav" className="bg-customNav">
@@ -36,23 +36,20 @@ export default function Navbar({
         <div className="relative flex h-16 items-center justify-between">
           {/* Mobile Menu Button */}
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <DisclosureButton
-              className="group relative inline-flex items-center justify-center
-             rounded-md p-2 text-customNavDark hover:bg-transparent hover:text-customWhite 
-             focus:outline-none focus:ring-2 focus:ring-inset focus:ring-customWhite"
-            >
+            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-customNavDark hover:bg-transparent hover:text-customWhite focus:outline-none focus:ring-2 focus:ring-inset focus:ring-customWhite">
               <span className="sr-only">Open main menu</span>
               <Bars3Icon
-                aria-hidden="true"
                 className="block size-6 group-data-[open]:hidden"
+                aria-hidden="true"
               />
               <XMarkIcon
-                aria-hidden="true"
                 className="hidden size-6 group-data-[open]:block"
+                aria-hidden="true"
               />
             </DisclosureButton>
           </div>
 
+          {/* Navigation Links */}
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="hidden sm:ml-6 sm:flex items-center space-x-4">
               {navigation.map((item) => (
@@ -70,6 +67,7 @@ export default function Navbar({
                 </Link>
               ))}
 
+              {/* Dark Mode Toggle */}
               <button
                 onClick={() => setDarkMode(!darkMode)}
                 className="p-2 rounded-full text-customWhite"
@@ -93,23 +91,21 @@ export default function Navbar({
             </div>
           </div>
 
-          {/* Login / Register / Logout Section */}
+          {/* User Login / Logout */}
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             {isLoggedIn ? (
               <Menu as="div" className="relative ml-3">
-                <div>
-                  <MenuButton className="relative flex rounded-full text-sm focus:outline-none text-customWhite">
-                    {username}
-                  </MenuButton>
-                </div>
+                <MenuButton className="relative flex rounded-full text-sm focus:outline-none text-customWhite transition transform duration-300 ease-out">
+                  {user.name || user.email}
+                </MenuButton>
                 <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                   <Menu.Item>
                     {({ active }) => (
                       <button
-                        onClick={handleLogout}
+                        onClick={logout}
                         className={classNames(
                           active ? "bg-gray-100" : "",
-                          "block px-4 py-2 text-sm text-gray-700"
+                          "block px-4 py-2 text-sm text-gray-700 w-full text-left transition transform duration-300 ease-out hover:translate-x-1"
                         )}
                       >
                         Logout
@@ -122,13 +118,13 @@ export default function Navbar({
               <div className="flex space-x-2">
                 <Link
                   to="/register"
-                  className="text-sm font-medium text-customWhite hover:bg-hover hover:text-customWhite px-3 py-2 rounded-md"
+                  className="text-sm font-medium text-customWhite hover:bg-hover hover:text-customWhite px-3 py-2 rounded-md transition transform duration-300 ease-out hover:scale-105"
                 >
                   Register
                 </Link>
                 <Link
                   to="/login"
-                  className="text-sm font-medium text-customWhite hover:bg-hover hover:text-customWhite px-3 py-2 rounded-md"
+                  className="text-sm font-medium text-customWhite hover:bg-hover hover:text-customWhite px-3 py-2 rounded-md transition transform duration-300 ease-out hover:scale-105"
                 >
                   Login
                 </Link>
@@ -138,6 +134,7 @@ export default function Navbar({
         </div>
       </div>
 
+      {/* Mobile Menu Panel */}
       <DisclosurePanel className="sm:hidden">
         <div className="space-y-1 px-2 pb-3 pt-2">
           {navigation.map((item) => (
@@ -181,8 +178,8 @@ export default function Navbar({
 
           {isLoggedIn ? (
             <button
-              onClick={handleLogout}
-              className="text-base font-medium text-customWhite hover:bg-hover px-3 py-2 rounded-md"
+              onClick={logout}
+              className="text-base font-medium text-customWhite hover:bg-hover px-3 py-2 rounded-md w-full text-left"
             >
               Logout
             </button>

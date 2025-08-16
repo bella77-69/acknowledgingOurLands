@@ -1,13 +1,9 @@
-import express from 'express';
-
-import acknowledgmentController from '../controllers/acknowledgmentController.js';
-import { authMiddleware } from '../middleware/auth.js';
-
+const express = require("express");
 const router = express.Router();
+const acknowledgmentController = require("../controllers/acknowledgmentController");
+const authMiddleware = require("../middleware/authMiddleware");
 
-router.post('/', authMiddleware, acknowledgmentController.create);
-router.get('/', authMiddleware, acknowledgmentController.getAll);
-router.put('/:id', authMiddleware, acknowledgmentController.update);
-router.delete('/:id', authMiddleware, acknowledgmentController.remove);
+router.post("/", authMiddleware, acknowledgmentController.createAcknowledgment);
+router.get("/", authMiddleware, acknowledgmentController.getAcknowledgments);
 
-export default router;
+module.exports = router;

@@ -23,3 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 .env
+secrets.js
+config
+generateHashes.js
+hashPasswords.js

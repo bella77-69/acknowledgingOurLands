@@ -1,13 +1,23 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SavedList from "./SavedList";
 import RecentActivity from "./RecentActivity";
 
 export default function Dashboard() {
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      setUsername(user.name || user.email); // use name if available, otherwise email
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 md:p-8">
       <header className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          Welcome Back
+          Welcome Back{username ? `, ${username}` : ""}
         </h1>
         <p className="text-gray-600 dark:text-gray-300">
           Manage your land acknowledgments
@@ -29,15 +39,15 @@ export default function Dashboard() {
                 + Create New
               </Link>
             </div>
-            <SavedList />
+            {/* <SavedList /> */}
           </div>
 
-          <RecentActivity />
+          {/* <RecentActivity /> */}
         </div>
 
         {/* Sidebar */}
         <div className="space-y-6">
-          <QuickResources />
+          {/* QuickResources or other components */}
         </div>
       </div>
     </div>

@@ -1,27 +1,22 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import userRoutes from './routes/usersRoutes.js';
-import acknowledgmentRoutes from './routes/acknowledgmentRoutes.js';
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
 
-dotenv.config();
+const authRoutes = require("./routes/authRoutes");
+const acknowledgmentRoutes = require("./routes/acknowledgmentRoutes");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+app.use(cors({
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
-// Middleware
-app.use(cors());
 app.use(express.json());
 
-// Routes
-app.use('/api', userRoutes);
-app.use('/api/acknowledgments', acknowledgmentRoutes);
 
-// Health check
-app.get('/', (req, res) => {
-  res.json({ status: 'healthy' });
-});
+app.use("/auth", authRoutes);
+app.use("/acknowledgments", acknowledgmentRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
