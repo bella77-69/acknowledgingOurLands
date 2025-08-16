@@ -11,7 +11,7 @@ function Login() {
   const navigate = useNavigate();
 
   // Get login function from context
-  const { login, isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, login } = useContext(AuthContext);
 
   // Redirect if already logged in
   useEffect(() => {
@@ -25,12 +25,6 @@ function Login() {
     setIsLoading(true);
     setError("");
 
-    if (!email.trim() || !password.trim()) {
-      setError("Please enter both email and password");
-      setIsLoading(false);
-      return;
-    }
-
     try {
       const response = await fetch("http://localhost:5000/auth/login", {
         method: "POST",
@@ -41,14 +35,15 @@ function Login() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Invalid email or password");
+        throw new Error(data.message || "Login failed");
       }
 
-      // Use context to update global auth state
-      if (data.user && data.token) {
-        login(data.user, data.token);
+      if (!data.token) {
+        throw new Error("Token missing in response");
       }
 
+      // Use email as basic user data since backend only returns token
+      login(email, data.token);
       navigate("/dashboard", { replace: true });
     } catch (err) {
       console.error("Login error:", err);
