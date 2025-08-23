@@ -85,6 +85,7 @@ const DiscoverLands = () => {
 
     setIsSaving(true);
     setSaveSuccess(false);
+    setError(null);
 
     try {
       const token = localStorage.getItem("token");
@@ -93,27 +94,27 @@ const DiscoverLands = () => {
         return;
       }
 
-      const acknowledgmentText = `${
-        acknowledgmentVariations[currentAcknowledgmentIndex]
-      }${indigenousLands
+      const territoryNames = indigenousLands
         .map((land) => land?.properties?.Name)
-        .join(", ")} First Nations.`;
+        .filter(Boolean)
+        .join(", ");
 
-      await axios.post(
-        "http://localhost:5000/api/acknowledgments",
-        {
-          title: `Acknowledgment for ${city}`,
-          content: acknowledgmentText,
-          location: city,
-          tags: indigenousLands.map((land) => land?.properties?.Name),
+      const acknowledgmentText = `${acknowledgmentVariations[currentAcknowledgmentIndex]}${territoryNames} First Nations.`;
+
+      const payload = {
+        title: `Acknowledgment for ${city}`,
+        content: acknowledgmentText,
+        territory: territoryNames,
+        traditionalKeepers: territoryNames,
+        isPublic: false,
+      };
+
+      await axios.post("http://localhost:5000/api/acknowledgments", payload, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      });
 
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 3000);

@@ -26,7 +26,7 @@ function Login() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5000/auth/login", {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -42,8 +42,7 @@ function Login() {
         throw new Error("Token missing in response");
       }
 
-      // Use email as basic user data since backend only returns token
-      login(email, data.token);
+      login(data.user, data.token);
       navigate("/dashboard", { replace: true });
     } catch (err) {
       console.error("Login error:", err);
@@ -84,7 +83,7 @@ function Login() {
                   </label>
                   <input
                     id="email"
-                    type="text"
+                    type="email"
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}

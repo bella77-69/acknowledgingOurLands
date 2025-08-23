@@ -10,6 +10,8 @@ import Contact from "./Pages/Contact/Contact";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
 import Dashboard from "./Pages/Dashboard/Dashboard";
+import Profile from "./Pages/Dashboard/Profile";
+import CreateAcknowledgment from "./Pages/Acknowledgments/CreateAcknowledgments";
 import { AuthProvider } from "./Context/AuthContext";
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/create" element={<CreateAcknowledgment />} />
           </Routes>
           <Footer />
         </BrowserRouter>

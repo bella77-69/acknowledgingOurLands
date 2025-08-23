@@ -1,22 +1,24 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require("body-parser");
+const helmet = require('helmet');
 
-const authRoutes = require("./routes/authRoutes");
-const acknowledgmentRoutes = require("./routes/acknowledgmentRoutes");
+const authRoutes = require('./routes/auth');
+const acknowledgmentRoutes = require('./routes/acknowledgments');
+const adminRoutes = require('./routes/admin');
 
 const app = express();
-app.use(cors({
-  origin: "http://localhost:5173",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 app.use(express.json());
 
+app.use(helmet());
 
-app.use("/auth", authRoutes);
-app.use("/acknowledgments", acknowledgmentRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/acknowledgments', acknowledgmentRoutes);
+app.use('/api/admin', adminRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
