@@ -55,6 +55,10 @@ module.exports = {
          accent: 'rgb(var(--color-accent))',
         'accent-hover': 'rgb(var(--color-accent-hover))',
       },
+      spacing: {
+        '18': '4.5rem',
+        '88': '22rem',
+      }
     },
   },
   plugins: [],
