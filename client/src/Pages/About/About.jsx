@@ -8,7 +8,6 @@ import land3 from "../../assets/Images/land-landscape3.png";
 const About = () => {
   return (
     <PageContainer className="py-6 sm:py-8 lg:py-12">
-      {/* Header */}
       <div className="text-center mb-8 sm:mb-12 lg:mb-16 px-4">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
           About Us
@@ -19,13 +18,11 @@ const About = () => {
         </p>
       </div>
 
-      {/* Content Section 1 */}
       <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 lg:gap-12 mb-10 sm:mb-14 lg:mb-18">
-        {/* Text Content */}
         <div className="w-full lg:w-1/2 px-4 sm:px-0">
-          <Card className="h-full border-0 shadow-sm sm:shadow-md hover:shadow-md transition-shadow duration-300">
+          <Card className="h-full border-0">
             <div className="relative">
-              <h2 className="text-xl sm:text-2xl font-bold text-customNav dark:text-customNavLight mb-3 sm:mb-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white  mb-3 sm:mb-4">
                 Territory acknowledgment is
               </h2>
               <p className="text-gray-700 dark:text-gray-200 mb-4 text-sm sm:text-base leading-relaxed">
@@ -47,7 +44,7 @@ const About = () => {
 
         <div className="w-full lg:w-1/2 px-4 lg:px-0">
           <div className="relative">
-            <div className="lg:block absolute -bottom-4 -left-4 w-24 h-24 bg-customNav/20 rounded-full backdrop-blur-sm"></div>
+            <div className="lg:block absolute -bottom-4 -left-4 w-24 h-24 bg-customNav opacity-5 rounded-full backdrop-blur-sm"></div>
 
             <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4 relative">
               <div className="relative group">
@@ -63,20 +60,18 @@ const About = () => {
                   src={land1}
                   alt="Another view of Indigenous land"
                 />
-                <div className="absolute -top-8 -right-4 lg:-top-16 lg:-right-8 w-40 h-40 lg:w-60 lg:h-60 bg-customNav opacity-20 rounded-full backdrop-blur-sm"></div>
+                <div className="absolute -top-8 -right-4 lg:-top-16 lg:-right-8 w-40 h-40 lg:w-60 lg:h-60 bg-customNav opacity-5 rounded-full backdrop-blur-sm"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Content Section 2 */}
       <div className="flex flex-col lg:flex-row-reverse items-center gap-6 sm:gap-8 lg:gap-12 mb-10 sm:mb-14 lg:mb-18">
-        {/* Text Content */}
         <div className="w-full lg:w-1/2 px-4 sm:px-0">
-          <Card className="h-full border-0 shadow-sm sm:shadow-md hover:shadow-md transition-shadow duration-300">
+          <Card className="h-full border-0">
             <div className="relative">
-              <h2 className="text-xl sm:text-2xl font-bold text-customNav dark:text-customNavLight mb-3 sm:mb-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
                 With Acknowledging Our Lands
               </h2>
 
@@ -96,11 +91,11 @@ const About = () => {
 
         <div className="w-full lg:w-1/2 px-4 lg:px-0">
           <div className="relative">
-            <div className="lg:block absolute -bottom-4 -right-4 w-24 h-24 bg-customNav/20 rounded-full backdrop-blur-sm"></div>
+            <div className="lg:block absolute -bottom-4 -right-4 w-24 h-24 bg-customNav opacity-5 rounded-full backdrop-blur-sm"></div>
 
             <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4 relative">
               <div className="relative group">
-                <div className="absolute -top-8 -left-4 lg:-top-16 lg:-left-8 w-40 h-40 lg:w-60 lg:h-60 bg-customNav opacity-20 rounded-full backdrop-blur-sm"></div>
+                <div className="absolute -top-8 -left-4 lg:-top-16 lg:-left-8 w-40 h-40 lg:w-60 lg:h-60 bg-customNav opacity-5 rounded-full backdrop-blur-sm"></div>
                 <img
                   className="rounded-xl object-cover w-full h-48 sm:h-56 lg:h-48 shadow-md group-hover:shadow-lg transition-all duration-300"
                   src={land2}
@@ -119,7 +114,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* Call to Action */}
       <div className="text-center px-4">
         <Button
           as="a"
