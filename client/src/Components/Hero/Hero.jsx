@@ -1,32 +1,30 @@
-import React from "react";
+import { Button } from "../../Components/UI";
 
 export default function Hero() {
   return (
-    <div className="hero min-h-[60vh] bg-hero-gradient dark:bg-hero-gradient-dark bg-cover bg-center text-primary dark:text-darkText">
-      <div className="flex justify-center z-10 text-center">
-        <div className="mx-auto max-w-4xl py-16 sm:py-24 lg:py-32">
-          <div className="flex flex-col items-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl md:px-8 lg:px-10 xs:mb-2 lg:mb-6 font-semibold tracking-tight">
-              Acknowledging Our Lands
-            </h1>
+    <div className="relative min-h-[60vh] bg-hero-gradient dark:bg-hero-gradient-dark bg-cover bg-center">
+      <div className="absolute inset-0 bg-black/10 dark:bg-black/20"></div>
 
-            <p className="mb-6 max-w-xxl text-sm text-secondary dark:text-secondary px-2 xs:px-4 md:px-8 sm:text-xl md:mb-10 lg:mb-12">
-              Acknowledging Our Lands is an app designed to help you identify
-              the Indigenous lands you are on and create meaningful land
-              acknowledgments. Land acknowledgments recognize the deep
-              connection Indigenous Peoples have with their traditional
-              territories. They are an act of respect and a step towards
-              reconciliation.
-            </p>
-
-            <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="/discover"
-                className="rounded-lg bg-accent hover:bg-accent-hover px-6 py-3 text-base font-semibold text-white shadow-lg focus:outline-none transition"
-              >
-                Get Started
-              </a>
-            </div>
+      <div className="relative z-10  min-h-[60vh] w-full">
+        <div className="flex justify-center flex-col items-center text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold tracking-tight mb-4 sm:mb-6 text-white">
+            Acknowledging Our Lands
+          </h1>
+          <p className="text-sm sm:text-lg md:text-xl text-white/90 mb-8 sm:mb-10 lg:mb-12 leading-relaxed max-w-3xl mx-auto px-2 xs:px-4">
+            Acknowledging Our Lands is an app designed to help you identify the
+            Indigenous lands you are on and create meaningful land
+            acknowledgments. Land acknowledgments recognize the deep connection
+            Indigenous Peoples have with their traditional territories. They are
+            an act of respect and a step towards reconciliation.
+          </p>
+          <div className="mt-6">
+            <Button
+              as="a"
+              href="/discover"
+              className="bg-accent hover:bg-accent-hover px-6 py-3 text-base sm:text-lg font-semibold shadow-lg border-2 border-white/20"
+            >
+              Get Started
+            </Button>
           </div>
         </div>
       </div>
