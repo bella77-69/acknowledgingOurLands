@@ -27,7 +27,6 @@ export default function Profile() {
           }
         );
 
-        // Set form data from backend response
         setFormData({
           firstName: response.data.user.firstName || "",
           lastName: response.data.user.lastName || "",
@@ -54,7 +53,6 @@ export default function Profile() {
     setSuccess("");
 
     try {
-      // make api call
       await axios.put(
         "http://localhost:5000/api/auth/profile",
         {
@@ -73,13 +71,11 @@ export default function Profile() {
         lastName: formData.lastName,
       };
 
-      // Update both context and localStorage
       login(updatedUser, localStorage.getItem("token"));
       localStorage.setItem("user", JSON.stringify(updatedUser));
 
       setSuccess("Profile updated successfully!");
 
-      // redirect after success
       setTimeout(() => {
         navigate("/dashboard");
       }, 1500);

@@ -25,7 +25,6 @@ export default function Register() {
     e.preventDefault();
     setError("");
 
-    // Basic validation
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
       return;
@@ -55,7 +54,6 @@ export default function Register() {
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Registration failed");
 
-      // Log in user after registration
       login(data.user, data.token);
       navigate("/dashboard", { replace: true });
     } catch (err) {
@@ -67,11 +65,9 @@ export default function Register() {
 
   return (
     <PageContainer className="relative py-10 sm:py-16 lg:py-20">
-      {/* Decorative Circles */}
       <div className="absolute -bottom-4 left-0 sm:left-32 lg:left-72 lg:bottom-16 w-32 h-32 bg-customNav opacity-5 rounded-full backdrop-blur-sm"></div>
       <div className="absolute -top-38 -left-16 lg:left-40 w-60 h-60 bg-customNav opacity-5 rounded-full backdrop-blur-sm"></div>
 
-      {/* Header */}
       <div className="text-center mb-12 px-4">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3">
           Create an Account
@@ -91,7 +87,6 @@ export default function Register() {
         </p>
       </div>
 
-      {/* Form Card */}
       <div className="flex justify-center">
         <Card className="w-full max-w-md p-8 relative z-10">
           {error && (

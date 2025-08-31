@@ -190,7 +190,6 @@ const Location = () => {
               </div>
             </div>
 
-            {/* Map Component */}
             <div className="sm:col-span-1">
               <MapContainer
                 center={[latitude, longitude]}

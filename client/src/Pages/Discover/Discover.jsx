@@ -23,7 +23,6 @@ const Discover = () => {
     }
   }, []);
 
-  // Construct the URL for the iframe
   const embedUrl =
     latitude && longitude
       ? `https://native-land.ca/api/embed/embed.html?maps=languages,territories&position=${latitude},${longitude}&key=${your_api_key}`

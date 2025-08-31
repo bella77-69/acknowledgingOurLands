@@ -16,16 +16,12 @@ export const AuthProvider = ({ children }) => {
         if (token && savedUser) {
           const parsedUser = JSON.parse(savedUser);
 
-          // Optional: Verify token validity with backend
-          // const isValid = await verifyToken(token);
-          // if (!isValid) throw new Error("Invalid token");
-
           setUser(parsedUser);
           setIsLoggedIn(true);
         }
       } catch (error) {
         console.error("Auth initialization error:", error);
-        logout(); // Clear invalid auth data
+        logout();
       } finally {
         setIsLoading(false);
       }
@@ -36,7 +32,6 @@ export const AuthProvider = ({ children }) => {
 
   const login = (userData, token) => {
     try {
-      // Handle both string (email) and object user data
       const user =
         typeof userData === "string" ? { email: userData } : userData;
 
@@ -44,7 +39,6 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("user", JSON.stringify(user));
       setUser(user);
       setIsLoggedIn(true);
-      // console.log("Login successful", { user, token });
     } catch (error) {
       console.error("Login failed:", error);
       throw error;

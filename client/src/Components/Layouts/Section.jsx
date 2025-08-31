@@ -8,7 +8,6 @@ export const Section = ({ title, paragraphs, images, reverse = false }) => {
       } 
         items-center gap-6 sm:gap-8 lg:gap-12 mb-10 sm:mb-14 lg:mb-18`}
     >
-      {/* Text Content */}
       <div className="w-full lg:w-1/2">
         <Card className="h-full border-0 shadow-sm sm:shadow-md hover:shadow-md transition-shadow duration-300">
           <div>
@@ -27,7 +26,6 @@ export const Section = ({ title, paragraphs, images, reverse = false }) => {
         </Card>
       </div>
 
-      {/* Image Grid */}
       <div className="w-full lg:w-1/2">
         <div className="relative grid grid-cols-2 gap-4">
           {images.map((src, idx) => (

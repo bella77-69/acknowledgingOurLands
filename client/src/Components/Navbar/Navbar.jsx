@@ -13,7 +13,6 @@ import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import logo from "../../assets/Images/icon_one.png";
 
-// Base navigation items (always visible)
 const baseNavigation = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
@@ -22,7 +21,6 @@ const baseNavigation = [
   { name: "Contact", href: "/contact" },
 ];
 
-// Navigation item that will be visible only when logged in
 const authenticatedNavigation = [{ name: "Dashboard", href: "/dashboard" }];
 
 function classNames(...classes) {
@@ -34,7 +32,6 @@ export default function Navbar({ darkMode, setDarkMode }) {
   const navigate = useNavigate();
   const { isLoggedIn, user, logout } = useContext(AuthContext);
 
-  // Combine navigation based on auth state
   const navigation = [
     ...baseNavigation,
     ...(isLoggedIn ? authenticatedNavigation : []),
@@ -55,8 +52,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
-              {/* Mobile menu button */}
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+              <div className="absolute inset-y-0 left-0 flex items-center lg:hidden">
                 <DisclosureButton className="relative inline-flex items-center justify-center rounded-md p-2 text-customNavDark hover:bg-hover hover:text-customWhite focus:outline-none focus:ring-2 focus:ring-inset focus:ring-customWhite">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
@@ -67,12 +63,12 @@ export default function Navbar({ darkMode, setDarkMode }) {
                 </DisclosureButton>
               </div>
 
-              {/* Desktop navigation */}
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+              <div className="flex flex-1 items-center justify-center lg:items-stretch lg:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <img className="h-8 w-auto" src={logo} alt="Logo" />
                 </div>
-                <div className="hidden sm:ml-6 sm:flex items-center space-x-4">
+
+                <div className="hidden lg:ml-6 lg:flex items-center space-x-4">
                   {navigation.map((item) => (
                     <Link
                       key={item.name}
@@ -90,9 +86,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
                 </div>
               </div>
 
-              {/* Right side controls */}
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 space-x-4">
-                {/* Dark mode toggle */}
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 lg:static lg:inset-auto lg:ml-6 lg:pr-0 space-x-4">
                 <button
                   onClick={() => setDarkMode(!darkMode)}
                   className="p-2 rounded-full text-customWhite hover:bg-hover focus:outline-none focus:ring-2 focus:ring-customWhite"
@@ -114,7 +108,6 @@ export default function Navbar({ darkMode, setDarkMode }) {
                   </svg>
                 </button>
 
-                {/* Auth controls */}
                 {isLoggedIn ? (
                   <Menu as="div" className="relative">
                     <MenuButton className="flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-customWhite">
@@ -166,7 +159,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
                     </MenuItems>
                   </Menu>
                 ) : (
-                  <div className="flex space-x-2">
+                  <div className="hidden lg:flex space-x-2">
                     <Link
                       to="/register"
                       className="text-sm font-medium text-customWhite hover:bg-hover hover:text-customWhite px-3 py-2 rounded-md transition-colors duration-200"
@@ -185,8 +178,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
             </div>
           </div>
 
-          {/* Mobile menu */}
-          <DisclosurePanel className="sm:hidden">
+          <DisclosurePanel className="lg:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
               {navigation.map((item) => (
                 <DisclosureButton
@@ -204,7 +196,6 @@ export default function Navbar({ darkMode, setDarkMode }) {
                 </DisclosureButton>
               ))}
 
-              {/* Mobile auth controls */}
               <div className="pt-4 border-t border-gray-700">
                 {isLoggedIn ? (
                   <>

@@ -26,8 +26,6 @@ const LearnMore = () => {
 
   return (
     <PageContainer>
-      {/* Header */}
-
       <div className="text-center mb-12 lg:mb-16 px-4">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
           Learn More

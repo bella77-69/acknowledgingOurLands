@@ -18,8 +18,6 @@ function Contact() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16">
-        {/* Contact Information Card */}
-
         <Card className="p-6 sm:p-8 lg:p-10">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white  mb-3 sm:mb-4">
             Contact Us
@@ -72,7 +70,6 @@ function Contact() {
           </div>
         </Card>
 
-        {/* Contact Form Card */}
         <Card className="p-6 sm:p-8 lg:p-10">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
             Send a Message

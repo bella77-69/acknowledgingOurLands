@@ -129,13 +129,10 @@ const DiscoverLands = () => {
 
   return (
     <PageContainer className="py-6 sm:py-8 lg:py-12 relative">
-      {/* Decorative Circles */}
-
       <div className="absolute top-32 -left-16 lg:left-28 w-60 h-60 bg-customNav opacity-5 rounded-full backdrop-blur-sm"></div>
       <div className="absolute top-0 right-0 w-48 h-48 bg-customNav opacity-5 rounded-full backdrop-blur-sm"></div>
       <div className="absolute bottom-0 left-4 lg:left-8 w-32 h-32 bg-customNav opacity-5 rounded-full backdrop-blur-sm"></div>
 
-      {/* Header */}
       <div className="text-center mb-10 px-4">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3">
           Discover Indigenous Lands
@@ -146,9 +143,7 @@ const DiscoverLands = () => {
         </p>
       </div>
 
-      {/* Grid: Cards + Map */}
       <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12">
-        {/* Left Column: Cards */}
         <div className="flex-1 flex flex-col gap-6">
           <Card className="relative z-10">
             <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2">
@@ -197,7 +192,6 @@ const DiscoverLands = () => {
           </Card>
         </div>
 
-        {/* Right Column: Map */}
         <div className="flex-1 relative z-10">
           {latitude && longitude ? (
             <MapContainer
@@ -222,7 +216,6 @@ const DiscoverLands = () => {
         </div>
       </div>
 
-      {/* Land Acknowledgment */}
       <div className="mt-8 text-center">
         <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2">
           Land Acknowledgment
