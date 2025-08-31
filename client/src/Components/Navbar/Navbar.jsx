@@ -89,7 +89,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 lg:static lg:inset-auto lg:ml-6 lg:pr-0 space-x-4">
                 <button
                   onClick={() => setDarkMode(!darkMode)}
-                  className="p-2 rounded-full text-customWhite hover:bg-hover focus:outline-none focus:ring-2 focus:ring-customWhite"
+                  className="hidden lg:block p-2 rounded-full text-customWhite hover:bg-hover focus:outline-none focus:ring-2 focus:ring-customWhite"
                   aria-label={darkMode ? "Light mode" : "Dark mode"}
                 >
                   <svg
@@ -195,7 +195,28 @@ export default function Navbar({ darkMode, setDarkMode }) {
                   {item.name}
                 </DisclosureButton>
               ))}
-
+              <div className="border-t border-gray-700 mt-3 pt-3">
+                <button
+                  onClick={() => setDarkMode(!darkMode)}
+                  className="p-2 rounded-full text-customWhite hover:bg-hover focus:outline-none focus:ring-2 focus:ring-customWhite"
+                  aria-label={darkMode ? "Light mode" : "Dark mode"}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                    />
+                  </svg>
+                </button>
+              </div>
               <div className="pt-4 border-t border-gray-700">
                 {isLoggedIn ? (
                   <>
