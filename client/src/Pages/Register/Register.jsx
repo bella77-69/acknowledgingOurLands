@@ -1,6 +1,8 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { PageContainer } from "../../Components/Layouts";
+import { Card, Button } from "../../Components/UI";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -13,29 +15,25 @@ export default function Register() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
-    // Validation
+    // Basic validation
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
       return;
     }
-
     if (formData.password.length < 6) {
       setError("Password must be at least 6 characters");
       return;
     }
-
     if (!formData.email.includes("@")) {
       setError("Please enter a valid email address");
       return;
@@ -43,208 +41,157 @@ export default function Register() {
 
     try {
       setLoading(true);
-
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
-        {
+      const response = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
           password: formData.password,
-        }
-      );
+        }),
+      });
 
-      // Store token and basic user data
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || "Registration failed");
 
-      // Redirect to dashboard or home page
+      // Log in user after registration
+      login(data.user, data.token);
       navigate("/dashboard", { replace: true });
     } catch (err) {
-      // Handle different error cases
-      if (err.response) {
-        if (err.response.status === 400) {
-          setError(err.response.data.message || "Registration failed");
-        } else if (err.response.status === 409) {
-          setError("Email already exists");
-        } else {
-          setError(err.response.data.message || "Registration failed");
-        }
-      } else if (err.request) {
-        setError("No response from server. Please try again.");
-      } else {
-        setError("An unexpected error occurred");
-      }
+      setError(err.message || "Registration failed");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
-            Create an account
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-            Already have an account?{" "}
-            <Link
-              to="/login"
-              className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+    <PageContainer className="relative py-10 sm:py-16 lg:py-20">
+      {/* Decorative Circles */}
+      <div className="absolute -bottom-4 left-0 sm:left-32 lg:left-72 lg:bottom-16 w-32 h-32 bg-customNav opacity-5 rounded-full backdrop-blur-sm"></div>
+      <div className="absolute -top-38 -left-16 lg:left-40 w-60 h-60 bg-customNav opacity-5 rounded-full backdrop-blur-sm"></div>
+
+      {/* Header */}
+      <div className="text-center mb-12 px-4">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3">
+          Create an Account
+        </h1>
+        <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+          Already have an account?{" "}
+          <div className="flex justify-center">
+            <Button
+              as="a"
+              href="/login"
+              variant="link"
+              className="text-customNav hover:underline "
             >
               Sign in
-            </Link>
-          </p>
-        </div>
-
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-            {error}
+            </Button>
           </div>
-        )}
+        </p>
+      </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm space-y-4">
+      {/* Form Card */}
+      <div className="flex justify-center">
+        <Card className="w-full max-w-md p-8 relative z-10">
+          {error && (
+            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+              {error}
+            </div>
+          )}
+
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label
-                  htmlFor="firstName"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                >
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                   First Name
                 </label>
                 <input
-                  id="firstName"
                   name="firstName"
                   type="text"
-                  required
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                  placeholder="First name"
+                  placeholder="First Name"
                   value={formData.firstName}
                   onChange={handleChange}
+                  required
+                  className="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-customNav focus:border-customNav dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
                 />
+                <div className="absolute -top-8 -right-4 md:-right-28 lg:top-6 lg:-right-52 w-40 h-40 lg:w-60 lg:h-60 bg-customNav opacity-5 rounded-full backdrop-blur-sm"></div>
               </div>
               <div>
-                <label
-                  htmlFor="lastName"
-                  className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                >
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Last Name
                 </label>
                 <input
-                  id="lastName"
                   name="lastName"
                   type="text"
-                  required
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                  placeholder="Last name"
+                  placeholder="Last Name"
                   value={formData.lastName}
                   onChange={handleChange}
+                  required
+                  className="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-customNav focus:border-customNav dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
                 />
               </div>
             </div>
 
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-              >
-                Email address
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Email
               </label>
               <input
-                id="email"
                 name="email"
                 type="email"
-                autoComplete="email"
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                placeholder="Email address"
+                placeholder="Email"
                 value={formData.email}
                 onChange={handleChange}
+                required
+                className="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-customNav focus:border-customNav dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
               />
             </div>
 
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-              >
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Password
               </label>
               <input
-                id="password"
                 name="password"
                 type="password"
-                required
-                minLength="6"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 placeholder="Password (min 6 characters)"
                 value={formData.password}
                 onChange={handleChange}
+                required
+                minLength={6}
+                className="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-customNav focus:border-customNav dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
               />
             </div>
 
             <div>
-              <label
-                htmlFor="confirmPassword"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-              >
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Confirm Password
               </label>
               <input
-                id="confirmPassword"
                 name="confirmPassword"
                 type="password"
-                required
-                minLength="6"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 placeholder="Confirm Password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
+                required
+                minLength={6}
+                className="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-customNav focus:border-customNav dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
               />
             </div>
-          </div>
 
-          <div>
-            <button
+            <Button
               type="submit"
-              disabled={loading}
-              className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
-                loading ? "opacity-50 cursor-not-allowed" : ""
+              className={`w-full ${
+                loading ? "opacity-75 cursor-not-allowed" : "hover:scale-105"
               }`}
+              disabled={loading}
             >
-              {loading ? (
-                <>
-                  <svg
-                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    ></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    ></path>
-                  </svg>
-                  Registering...
-                </>
-              ) : (
-                "Register"
-              )}
-            </button>
-          </div>
-        </form>
+              {loading ? "Registering..." : "Register"}
+            </Button>
+          </form>
+        </Card>
       </div>
-    </div>
+    </PageContainer>
   );
 }
