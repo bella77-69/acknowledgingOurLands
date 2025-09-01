@@ -1,6 +1,8 @@
 import { Button } from "../../Components/UI";
+import { useNavigate } from "react-router-dom";
 
 export default function Hero() {
+  const navigate = useNavigate();
   return (
     <div className="relative min-h-[60vh] bg-hero-gradient dark:bg-hero-gradient-dark bg-cover bg-center">
       <div className="absolute inset-0 bg-black/10 dark:bg-black/20"></div>
@@ -20,7 +22,7 @@ export default function Hero() {
           <div className="mt-6">
             <Button
               as="a"
-              href="/discover"
+              onClick={() => navigate("/discover")}
               className="bg-accent hover:bg-accent-hover px-6 py-3 text-base sm:text-lg font-semibold shadow-lg border-2 border-white/20"
             >
               Get Started
