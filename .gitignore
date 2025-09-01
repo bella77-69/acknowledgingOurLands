@@ -24,6 +24,7 @@ dist-ssr
 *.sw?
 .env
 secrets.js
-config
+
+database.js
 generateHashes.js
 hashPasswords.js
