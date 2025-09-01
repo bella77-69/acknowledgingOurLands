@@ -1,56 +1,53 @@
 const pool = require('../config/database');
 
 class User {
-  static async create(userData) {
-    const [result] = await pool.execute(
-      'INSERT INTO users (email, password, first_name, last_name) VALUES (?, ?, ?, ?)',
-      [userData.email, userData.password, userData.firstName, userData.lastName]
+  static async create({ email, password, firstName, lastName }) {
+    const result = await pool.query(
+      `INSERT INTO users (email, password, first_name, last_name)
+       VALUES ($1, $2, $3, $4) RETURNING id`,
+      [email, password, firstName, lastName]
     );
-    return result.insertId;
+    return result.rows[0].id;
   }
 
   static async findByEmail(email) {
-    const [rows] = await pool.execute(
-      'SELECT * FROM users WHERE email = ?',
+    const result = await pool.query(
+      'SELECT * FROM users WHERE email = $1',
       [email]
     );
-    return rows[0];
+    return result.rows[0];
   }
 
   static async findById(id) {
-    const [rows] = await pool.execute(
-      'SELECT id, email, first_name, last_name, role, is_active, created_at FROM users WHERE id = ?',
+    const result = await pool.query(
+      'SELECT id, email, first_name, last_name, role, is_active, created_at FROM users WHERE id = $1',
       [id]
     );
-    return rows[0];
+    return result.rows[0];
   }
 
-static async update(id, updates) {
-  try {
+  static async update(id, updates) {
     const fields = [];
     const values = [];
-    
-    Object.keys(updates).forEach(key => {
-      fields.push(`${key} = ?`);
+
+    Object.keys(updates).forEach((key, index) => {
+      fields.push(`${key} = $${index + 1}`);
       values.push(updates[key]);
     });
-    
+
     values.push(id);
-    
-    await pool.execute(
-      `UPDATE users SET ${fields.join(', ')} WHERE id = ?`,
+
+    await pool.query(
+      `UPDATE users SET ${fields.join(', ')} WHERE id = $${values.length}`,
       values
     );
-  } catch (error) {
-    throw error;
   }
-}
 
   static async findAll() {
-    const [rows] = await pool.execute(
+    const result = await pool.query(
       'SELECT id, email, first_name, last_name, role, is_active, created_at FROM users'
     );
-    return rows;
+    return result.rows;
   }
 }
 

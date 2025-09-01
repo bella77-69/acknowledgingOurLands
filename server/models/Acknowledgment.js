@@ -1,63 +1,64 @@
 const pool = require('../config/database');
 
 class Acknowledgment {
-  static async create(ackData) {
-    const [result] = await pool.execute(
-      'INSERT INTO acknowledgments (user_id, title, content, territory, traditional_keepers, is_public) VALUES (?, ?, ?, ?, ?, ?)',
-      [ackData.userId, ackData.title, ackData.content, ackData.territory, ackData.traditionalKeepers, ackData.isPublic]
+  static async create({ userId, title, content, territory, traditionalKeepers, isPublic }) {
+    const result = await pool.query(
+      `INSERT INTO acknowledgments (user_id, title, content, territory, traditional_keepers, is_public)
+       VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`,
+      [userId, title, content, territory, traditionalKeepers, isPublic]
     );
-    return result.insertId;
+    return result.rows[0].id;
   }
 
   static async findByUserId(userId) {
-    const [rows] = await pool.execute(
-      'SELECT * FROM acknowledgments WHERE user_id = ? ORDER BY created_at DESC',
+    const result = await pool.query(
+      'SELECT * FROM acknowledgments WHERE user_id = $1 ORDER BY created_at DESC',
       [userId]
     );
-    return rows;
+    return result.rows;
   }
 
   static async findById(id) {
-    const [rows] = await pool.execute(
-      'SELECT * FROM acknowledgments WHERE id = ?',
+    const result = await pool.query(
+      'SELECT * FROM acknowledgments WHERE id = $1',
       [id]
     );
-    return rows[0];
+    return result.rows[0];
   }
 
   static async update(id, updates) {
     const fields = [];
     const values = [];
     
-    Object.keys(updates).forEach(key => {
-      fields.push(`${key} = ?`);
+    Object.keys(updates).forEach((key, index) => {
+      fields.push(`${key} = $${index + 1}`);
       values.push(updates[key]);
     });
     
-    values.push(id);
-    
-    await pool.execute(
-      `UPDATE acknowledgments SET ${fields.join(', ')} WHERE id = ?`,
+    values.push(id); // last value for WHERE clause
+
+    await pool.query(
+      `UPDATE acknowledgments SET ${fields.join(', ')} WHERE id = $${values.length}`,
       values
     );
   }
 
   static async delete(id) {
-    await pool.execute(
-      'DELETE FROM acknowledgments WHERE id = ?',
+    await pool.query(
+      'DELETE FROM acknowledgments WHERE id = $1',
       [id]
     );
   }
 
   static async findAllPublic() {
-    const [rows] = await pool.execute(
+    const result = await pool.query(
       `SELECT a.*, u.first_name, u.last_name 
-       FROM acknowledgments a 
-       JOIN users u ON a.user_id = u.id 
-       WHERE a.is_public = TRUE 
+       FROM acknowledgments a
+       JOIN users u ON a.user_id = u.id
+       WHERE a.is_public = TRUE
        ORDER BY a.created_at DESC`
     );
-    return rows;
+    return result.rows;
   }
 }
 
