@@ -25,6 +25,5 @@ dist-ssr
 .env
 secrets.js
 
-database.js
 generateHashes.js
 hashPasswords.js
