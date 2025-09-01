@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../Context/AuthContext";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function CreateAcknowledgment() {
   const { user } = useAuth();
   const [formData, setFormData] = useState({
@@ -26,7 +28,7 @@ export default function CreateAcknowledgment() {
 
     try {
       const response = await axios.post(
-        "https://acknowledgingourlands-server.onrender.com/api/acknowledgments",
+        `${API_URL}/api/acknowledgments`,
         formData,
         {
           headers: {

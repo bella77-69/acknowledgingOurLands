@@ -4,6 +4,8 @@ import { PageContainer } from "../../Components/Layouts";
 import { Card, Button } from "../../Components/UI";
 import { AuthContext } from "../../Context/AuthContext";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Register() {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -40,19 +42,16 @@ export default function Register() {
 
     try {
       setLoading(true);
-      const response = await fetch(
-        "https://acknowledgingourlands-server.onrender.com/apiauth/register",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            email: formData.email,
-            password: formData.password,
-          }),
-        }
-      );
+      const response = await fetch(`${API_URL}/apiauth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
 
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Registration failed");

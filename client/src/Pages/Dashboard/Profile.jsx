@@ -3,6 +3,8 @@ import { useAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Profile() {
   const { user, login } = useAuth();
   const navigate = useNavigate();
@@ -18,14 +20,11 @@ export default function Profile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get(
-          "https://acknowledgingourlands-server.onrender.com/api/auth/profile",
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
+        const response = await axios.get(`${API_URL}/api/auth/profile`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
 
         setFormData({
           firstName: response.data.user.firstName || "",
@@ -54,7 +53,7 @@ export default function Profile() {
 
     try {
       await axios.put(
-        "https://acknowledgingourlands-server.onrender.com/api/auth/profile",
+        `${API_URL}/api/auth/profile`,
         {
           firstName: formData.firstName,
           lastName: formData.lastName,

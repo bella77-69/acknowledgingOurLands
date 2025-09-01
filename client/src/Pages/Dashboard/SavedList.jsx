@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
 export default function SavedList({ onUpdate, onError }) {
   const [acknowledgments, setAcknowledgments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -10,14 +11,11 @@ export default function SavedList({ onUpdate, onError }) {
   useEffect(() => {
     const fetchAcknowledgments = async () => {
       try {
-        const response = await axios.get(
-          "https://acknowledgingourlands-server.onrender.com/api/acknowledgments/my",
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
+        const response = await axios.get(`${API_URL}/api/acknowledgments/my`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
 
         const data = Array.isArray(response.data?.acknowledgments)
           ? response.data.acknowledgments
@@ -46,14 +44,11 @@ export default function SavedList({ onUpdate, onError }) {
 
     try {
       setIsDeleting(id);
-      await axios.delete(
-        `https://acknowledgingourlands-server.onrender.com/api/acknowledgments/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
+      await axios.delete(`${API_URL}/api/acknowledgments/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       setAcknowledgments((prev) => prev.filter((ack) => ack.id !== id));
       onUpdate();
     } catch (err) {

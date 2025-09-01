@@ -4,6 +4,8 @@ import { useAuth } from "../../Context/AuthContext";
 import SavedList from "./SavedList";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Dashboard() {
   const { user } = useAuth();
   const [refreshKey, setRefreshKey] = useState(0);
@@ -21,14 +23,11 @@ export default function Dashboard() {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        const response = await axios.get(
-          "https://acknowledgingourlands-server.onrender.com/api/acknowledgments/my",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${API_URL}/api/acknowledgments/my`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         const acknowledgments = response.data?.acknowledgments || [];
 
