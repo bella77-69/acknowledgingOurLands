@@ -1,11 +1,14 @@
 import { Card, Button } from "../../Components/UI";
 import { PageContainer } from "../../Components/Layouts";
+import { useNavigate } from "react-router-dom";
 import land from "../../assets/Images/land-landscape.png";
 import land1 from "../../assets/Images/land-landscape1.png";
 import land2 from "../../assets/Images/land-landscape2.png";
 import land3 from "../../assets/Images/land-landscape3.png";
 
 const About = () => {
+  const navigate = useNavigate();
+
   return (
     <PageContainer className="py-6 sm:py-8 lg:py-12">
       <div className="text-center mb-8 sm:mb-12 lg:mb-16 px-4">
@@ -116,8 +119,7 @@ const About = () => {
 
       <div className="text-center px-4">
         <Button
-          as="a"
-          href="/learn-more"
+          onClick={() => navigate("/learn-more")}
           className="inline-flex items-center gap-2 px-6 py-3 text-sm sm:text-base font-semibold rounded-lg hover:scale-105 transition-transform duration-300"
         >
           Learn More
