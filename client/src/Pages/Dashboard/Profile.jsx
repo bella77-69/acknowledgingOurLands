@@ -19,7 +19,7 @@ export default function Profile() {
     const fetchProfile = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/auth/profile",
+          "https://acknowledgingourlands-server.onrender.com/api/auth/profile",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -54,7 +54,7 @@ export default function Profile() {
 
     try {
       await axios.put(
-        "http://localhost:5000/api/auth/profile",
+        "https://acknowledgingourlands-server.onrender.com/api/auth/profile",
         {
           firstName: formData.firstName,
           lastName: formData.lastName,

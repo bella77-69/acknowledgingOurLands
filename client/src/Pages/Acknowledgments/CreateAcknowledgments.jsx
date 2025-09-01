@@ -6,7 +6,6 @@ import { useAuth } from "../../Context/AuthContext";
 export default function CreateAcknowledgment() {
   const { user } = useAuth();
   const [formData, setFormData] = useState({
-    // title: "",
     content: "",
     location: "",
     user_id: user?.id || "",
@@ -26,12 +25,16 @@ export default function CreateAcknowledgment() {
     setError("");
 
     try {
-      const response = await axios.post("/acknowledgments", formData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(
+        "https://acknowledgingourlands-server.onrender.com/api/acknowledgments",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.status === 201) {
         navigate("/dashboard", { state: { refresh: true } });

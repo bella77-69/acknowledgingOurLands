@@ -22,7 +22,7 @@ export default function Dashboard() {
         if (!token) return;
 
         const response = await axios.get(
-          "http://localhost:5000/api/acknowledgments/my",
+          "https://acknowledgingourlands-server.onrender.com/api/acknowledgments/my",
           {
             headers: {
               Authorization: `Bearer ${token}`,

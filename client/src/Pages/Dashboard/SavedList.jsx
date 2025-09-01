@@ -11,7 +11,7 @@ export default function SavedList({ onUpdate, onError }) {
     const fetchAcknowledgments = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/acknowledgments/my",
+          "https://acknowledgingourlands-server.onrender.com/api/acknowledgments/my",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -46,11 +46,14 @@ export default function SavedList({ onUpdate, onError }) {
 
     try {
       setIsDeleting(id);
-      await axios.delete(`http://localhost:5000/api/acknowledgments/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      await axios.delete(
+        `https://acknowledgingourlands-server.onrender.com/api/acknowledgments/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       setAcknowledgments((prev) => prev.filter((ack) => ack.id !== id));
       onUpdate();
     } catch (err) {
