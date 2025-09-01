@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { PageContainer } from "../../Components/Layouts";
 import learn from "../../assets/Images/learn.png";
 
 const LearnMore = () => {
   const [openIndex, setOpenIndex] = useState(null);
+  const navigate = useNavigate();
 
   const toggleAnswer = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -112,7 +114,7 @@ const LearnMore = () => {
 
       <div className="text-center mt-16">
         <a
-          href="/contact"
+          onClick={() => navigate("/contact")}
           className="inline-flex items-center gap-2 px-6 py-3 text-sm sm:text-base font-semibold rounded-lg bg-customNav text-customWhite hover:bg-buttonHover transition-transform duration-300 hover:scale-105"
         >
           Contact Us
