@@ -65,7 +65,9 @@ export default function Navbar({ darkMode, setDarkMode }) {
 
               <div className="flex flex-1 items-center justify-center lg:items-stretch lg:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img className="h-8 w-auto" src={logo} alt="Logo" />
+                  <Link to="/">
+                    <img className="h-8 w-auto" src={logo} alt="Logo" />
+                  </Link>
                 </div>
 
                 <div className="hidden lg:ml-6 lg:flex items-center space-x-4">
