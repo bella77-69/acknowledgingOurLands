@@ -1,17 +1,22 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const pool = require('../config/database');
 
 const auth = async (req, res, next) => {
   try {
     const token = req.header('Authorization')?.replace('Bearer ', '');
-    
     if (!token) {
       return res.status(401).json({ message: 'Access denied. No token provided.' });
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.userId);
-    
+
+    const result = await pool.query(
+      'SELECT id, username, role, is_active FROM users WHERE id = $1',
+      [decoded.userId]
+    );
+
+    const user = result.rows[0];
+
     if (!user || !user.is_active) {
       return res.status(401).json({ message: 'Token is not valid.' });
     }
@@ -19,6 +24,7 @@ const auth = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
+    console.error(error);
     res.status(401).json({ message: 'Token is not valid.' });
   }
 };
