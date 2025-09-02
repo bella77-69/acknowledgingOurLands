@@ -113,7 +113,7 @@ export default function Login() {
             <div className="flex justify-center">
               <Button
                 as="a"
-                href="/register"
+                onClick={() => navigate("/register")}
                 variant="link"
                 className="text-customNav hover:underline"
               >
