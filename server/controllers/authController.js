@@ -93,6 +93,7 @@ exports.login = async (req, res) => {
 
     // Find user
     const user = await User.findByEmail(email);
+    console.log("Login attempt:", email);
     if (!user || !user.is_active) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
