@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
+import { formatDate } from "../../Utils/dateHelper";
 import SavedList from "./SavedList";
 import axios from "axios";
 
@@ -71,26 +72,6 @@ export default function Dashboard() {
   };
 
   const handleAcknowledgmentsUpdate = () => setRefreshKey((prev) => prev + 1);
-
-  const formatDate = (date) =>
-    date
-      ? new Date(date).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        })
-      : "Never";
-  const formatRelativeTime = (date) => {
-    if (!date) return "Never";
-    const now = new Date();
-    const diffTime = now - new Date(date);
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    if (diffDays === 0) return "Today";
-    if (diffDays === 1) return "Yesterday";
-    if (diffDays < 7) return `${diffDays} days ago`;
-    if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
-    return formatDate(date);
-  };
 
   if (isLoading) return <div>Loading dashboard...</div>;
 
@@ -180,6 +161,15 @@ export default function Dashboard() {
                 </div>
               ) : (
                 <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-orange-50 dark:bg-orange-900 p-3 rounded-lg">
+                    <p className="text-sm text-orange-800 dark:text-orange-200 mb-1">
+                      Last Activity
+                    </p>
+                    <p className="text-lg font-bold text-orange-900 dark:text-orange-100">
+                      {formatDate(stats.lastActivityDate)}
+                    </p>
+                  </div>
+
                   <div className="bg-blue-50 dark:bg-blue-900 p-3 rounded-lg">
                     <p className="text-sm text-blue-800 dark:text-blue-200 mb-1">
                       Total
