@@ -94,7 +94,7 @@ function Contact() {
               Response Time
             </h3>
             <p className="text-gray-700 dark:text-gray-200 text-sm">
-              We typically respond to all inquiries within 24-48 hours. Thank
+              We typically respond to all inquiries within 24 - 48 hours. Thank
               you for your patience.
             </p>
           </div>
