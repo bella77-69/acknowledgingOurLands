@@ -35,6 +35,11 @@ export default function Dashboard() {
         const publicAcknowledgments = acknowledgments.filter(
           (ack) => ack.is_public
         ).length;
+        const privateAcknowledgments =
+          totalAcknowledgments - publicAcknowledgments;
+        const publicPercentage = totalAcknowledgments
+          ? Math.round((publicAcknowledgments / totalAcknowledgments) * 100)
+          : 0;
 
         const lastActivityDate =
           acknowledgments.length > 0
@@ -48,6 +53,8 @@ export default function Dashboard() {
         setStats({
           totalAcknowledgments,
           publicAcknowledgments,
+          privateAcknowledgments,
+          publicPercentage,
           lastActivityDate,
         });
       } catch (err) {
@@ -58,10 +65,10 @@ export default function Dashboard() {
       }
     };
 
-    if (user) {
+    if (user?.id) {
       fetchStats();
     }
-  }, [user, refreshKey]);
+  }, [user?.id, refreshKey]);
 
   const getDisplayName = () => {
     if (!user) return null;

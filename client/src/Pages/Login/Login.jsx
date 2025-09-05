@@ -109,17 +109,15 @@ export default function Login() {
           </form>
 
           <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-300">
-            Don't have an account?{" "}
-            <div className="flex justify-center">
-              <Button
-                as="a"
-                onClick={() => navigate("/register")}
-                variant="link"
-                className="text-customNav hover:underline"
-              >
-                Create Account
-              </Button>
-            </div>
+            Don’t have an account?{" "}
+            <Button
+              as="a"
+              onClick={() => navigate("/register")}
+              variant="link"
+              className="text-customNav hover:underline inline"
+            >
+              Create Account
+            </Button>
           </p>
         </Card>
       </div>
