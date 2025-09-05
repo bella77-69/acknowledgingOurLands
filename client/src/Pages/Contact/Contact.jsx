@@ -1,7 +1,35 @@
+import { useState } from "react";
+import axios from "axios";
 import { Card, Button } from "../../Components/UI";
 import { PageContainer } from "../../Components/Layouts";
 
 function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+
+    try {
+      const response = await axios.post(`${API_URL}/api/contact`, formData);
+      setSuccess(response.data.message);
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to send message.");
+    }
+  };
   return (
     <PageContainer className="py-12 min-h-[70vh] bg-customWhite dark:bg-darkNav">
       <div className="absolute top-32 -left-16 lg:left-28 w-40 h-40 bg-customNav opacity-5 rounded-full backdrop-blur-sm"></div>
@@ -75,7 +103,7 @@ function Contact() {
             Send a Message
           </h2>
 
-          <form className="space-y-5">
+          <form className="space-y-5" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="name"
@@ -87,6 +115,8 @@ function Contact() {
                 id="name"
                 type="text"
                 required
+                value={formData.name}
+                onChange={handleChange}
                 className="w-full rounded-lg py-3 px-4 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700/50 text-textGreyDark dark:text-textGrey placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-customNav/30 focus:border-customNav transition-all"
                 placeholder="Your name"
               />
@@ -102,6 +132,8 @@ function Contact() {
                 id="email"
                 type="email"
                 required
+                value={formData.email}
+                onChange={handleChange}
                 className="w-full rounded-lg py-3 px-4 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700/50 text-textGreyDark dark:text-textGrey placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-customNav/30 focus:border-customNav transition-all"
                 placeholder="your.email@example.com"
               />
@@ -117,6 +149,8 @@ function Contact() {
                 id="subject"
                 type="text"
                 required
+                value={formData.subject}
+                onChange={handleChange}
                 className="w-full rounded-lg py-3 px-4 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700/50 text-textGreyDark dark:text-textGrey placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-customNav/30 focus:border-customNav transition-all"
                 placeholder="What is this regarding?"
               />
@@ -131,6 +165,8 @@ function Contact() {
               <textarea
                 id="message"
                 required
+                value={formData.message}
+                onChange={handleChange}
                 rows="5"
                 className="w-full rounded-lg px-4 py-3 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700/50 text-textGreyDark dark:text-textGrey placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-customNav/30 focus:border-customNav transition-all resize-none"
                 placeholder="How can we help you?"
@@ -143,6 +179,8 @@ function Contact() {
             >
               Send Message
             </Button>
+            {success && <p className="text-green-600 mt-2">{success}</p>}
+            {error && <p className="text-red-600 mt-2">{error}</p>}
           </form>
         </Card>
       </div>

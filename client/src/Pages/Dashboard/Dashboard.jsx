@@ -55,7 +55,7 @@ export default function Dashboard() {
       } catch (err) {
         console.error("Error fetching stats:", err);
         setError("Failed to load statistics. Logging out...");
-        logout(); // invalidate the token if 401
+        logout();
       } finally {
         setIsLoadingStats(false);
       }
@@ -96,7 +96,6 @@ export default function Dashboard() {
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Main dashboard content */}
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
               <div className="flex justify-between items-center mb-4">
@@ -117,7 +116,6 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Sidebar stats & profile */}
           <div className="space-y-6">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
               <h3 className="font-semibold text-lg mb-4 text-gray-900 dark:text-white">

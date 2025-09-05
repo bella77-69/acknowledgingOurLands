@@ -8,6 +8,7 @@ const authRoutes = require('./routes/auth');
 const acknowledgmentRoutes = require('./routes/acknowledgments');
 const adminRoutes = require('./routes/admin');
 const apiRoutes = require('./routes/api');
+const contactRoutes = require('./routes/contact');
 
 const app = express();
 app.use(bodyParser.json());
@@ -38,6 +39,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/acknowledgments', acknowledgmentRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api', apiRoutes);
+app.use('/api/contact', contactRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on ${PORT}`));
