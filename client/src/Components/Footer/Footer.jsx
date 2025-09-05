@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import logo from "../../assets/Images/icon_one.png";
 
@@ -93,13 +94,13 @@ function Footer() {
     <footer className="bg-customNav text-customWhite">
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="flex justify-center">
-          <a href="/" className="group">
+          <Link to="/" className="group">
             <img
               className="size-10 rounded-full transition-transform group-hover:scale-110"
               src={logo}
               alt="Acknowledging Our Lands logo"
             />
-          </a>
+          </Link>
         </div>
 
         <p className="mx-auto mt-6 max-w-md text-center leading-relaxed">
@@ -128,12 +129,12 @@ function Footer() {
           <ul className="flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <a
+                <Link
                   className="transition-colors hover:text-active focus:text-active focus:outline-none focus:ring-2 focus:ring-active focus:ring-offset-2 focus:ring-offset-customNav rounded"
-                  href={link.href}
+                  to={link.href}
                 >
                   {link.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
