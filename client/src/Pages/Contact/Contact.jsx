@@ -53,9 +53,9 @@ function Contact() {
             Contact Us
           </h2>
           <p className="text-gray-700 dark:text-gray-200 mb-4 text-sm sm:text-base leading-relaxed">
-            Your thoughts matter to us. Reach out with any questions, ideas, or
-            feedback about the Acknowledging Our Lands app. We're here to listen
-            and support you.
+            Your thoughts matter to us. Feel free to send your questions or
+            comments, either by email or directly. We're here to listen and
+            support you regarding the Acknowledging Our Lands app.
           </p>
 
           <div className="mt-10">
